@@ -58,7 +58,12 @@ If Foo is bound to john, is the following statement true?
 False,
 	variables can only be assigned once.  Once Foo is bound to the atom john it cannot be rebound to another value*.
 
+%% ... assigned once.  This is called single assignment.  Once ...
+%% Might be a good vocabulary work to include.
+
 * In some cases I will reuse a variable in separate examples which would require rebinding it.  If you are following along at the REPL and you have a variable called Head you can make the variable unbound by using the command f(Head).  This should only be used for testing purposes at the REPL and should never be used in an attempt to override single assignment variables.
+
+%% Will the acronym REPL and how to access it be explained in the intro?
 
 ---
 
@@ -67,6 +72,10 @@ Is it true that this is a tuple?
 
 True,
 	a tuple is a way to store a known number of terms by enclosing them in curly braces.
+
+%% Might be an interesting sidenote / footnote to include that tuple is
+%% pronounced so that it rhymes with couple, similar to the suffix in quintuple
+%% and sextuple.
 
 ---
 
@@ -132,6 +141,10 @@ Error!,
 		** exception error: no match of right hand side value {another,tuple,
                                                      	  {this,is,a,tuple}}
 	because the expression is trying to match the bound variable Foo with the atom 	another since they are both the first terms in the tuple.
+
+%% Might be worth going to the extra detail after you explain it is trying to
+%% match Foo with 'another' that this works out to {this, is, a, tuple} = another
+%% which obviously is not a match.
 
 ---
 
@@ -419,6 +432,10 @@ How can we create a flat list using an atom and a list?
 [atom | list],
 	because adding an atom to the [Head|_] of a list will create a new flat list.
 
+%% should it be mentioned that you can add more than one atom and other types of terms to the Head?
+%% because thus far the main use of the Head syntax always returned a single
+%% term.  [{foo,bar},baz|[old,list]].
+
 ---
 
 How can we create a new list that contains a list and an atom?
@@ -426,6 +443,10 @@ How can we create a new list that contains a list and an atom?
 [list | atom],
 	because adding an atom to the [_|Tail] of a list will create a new list containing
 	a list and an atom.
+
+%% Similary, we can add more that a single atom to the Tail.  Not sure it's
+%% highlighting at this point or if it just detracts from key points right now
+%% Don't want to get weighed down in chapter 1 with every detail
 
 ---
 
