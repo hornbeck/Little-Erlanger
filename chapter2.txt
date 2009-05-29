@@ -34,9 +34,8 @@ Will the following definition export a function?
 	-export([double/1]).
 
 True,
-	the -export() function is how you will make a list of your functions publicly available outside of the module.
+	the -export() function is how you will make a list of functions that are  publicly available outside of the module.
 
-%% maybe wording ...list of functions that are publicly available...
 
 ---
 
@@ -55,9 +54,7 @@ True,
 ---
 
 True or false: 
-	4 = double(3).
-
-%% typo, 6 not 4
+	6 = double(3).
 
 True,
 	double(3) is a function that will multiply the argument by 2. You may also notice that it looks like we are assigning the value of double(3) to the number 6, while it appears this way that is a wrong assumption.  The = operator serves two purposes in erlang, it will assign a value to an unbound variable or it will act as a pattern matching operator if the value on the left hand side is a bound variable or number.  In this case the number 6 matches the value returned by double(3) and thus is true.
@@ -66,9 +63,7 @@ True,
 
 How would you write the function double/1
 
-That was a trick question.  Let’s take a look at the next question to see how we would do this.
-
-%% How was it a trick question?  Maybe more along the lines of, we haven't covered how to do that yet
+You were not expected to be able to answer that yet.  Let's look at how to do this now.
 
 ---
 
@@ -206,11 +201,7 @@ True,
 What is the variable Foo bound to in the following statement?
 	Foo = fun(X, Y) -> X + Y end.
 
-Foo is bound to the anonymous function.
-
-%% Foo is bound to an anonymous function.  Or
-%% Foo is bound to the anonymous function fun(X, Y) -> X + Y end.
-%% Nit picky, and maybe wrong. :)
+Foo is bound to an anonymous function that takes two arguments and adds them together.
 
 ---
 
@@ -243,9 +234,7 @@ it’s not best practice to do this with anonymous functions, this is simply to 
 How can we have one function definition with multiple arity?
 
 We can’t,
-	I cheated a little and replaced the normal arguments with an arity of /1 and used a tuple, notice the curly braces, to pass in multiple values to the function.
-
-%% s/and used a tuple/by use of a tuple/
+	I cheated a little and replaced the normal arguments with an arity of /1 by using a tuple, notice the curly braces, to pass in multiple values to the function.
 
 ---
 
@@ -309,10 +298,7 @@ What is the returned value from the statement
 
 ---
 
-Can we write a pattern matching function like the MultiMath anonymous function in our module?
-
-%% Can we write a non-anonymous function in our module that behaves like the MultiMath anonymous function?
-%% Might be good to put emphasis on the distinction between old and new versions (anonymous vs non)
+Can we write a non-anonymous function in our module that behaves like the MultiMath anonymous function?
 
 Yes,
 	it would look like this.
@@ -339,9 +325,9 @@ What will our -export() definition look like now?
 
 Why does multimath have an arity of 1?
 
-Because it only takes 1 argument.
+Because it only takes 1 argument, a tuple
 
-%% Because it only takes 1 argument, a tuple.
+---
 
 The entire module now looks like this
 
@@ -360,13 +346,5 @@ multimath({double, X}) ->
 	{double, X * 2}.
 
 ---
-
-%% Might be getting ahead, but could show how to call functions in functions:
-
-%% mutimath({add, X, Y}) ->
-%%          {add, add(X, Y)};
-%% multimath({double, X}) ->
-%%           {double, double(X)}.
-
 
 Time for a break!
