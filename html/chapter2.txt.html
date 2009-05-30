@@ -1,0 +1,485 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Chapter 2: modules</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+    </style>
+  </head>
+  <body>
+    <h1>Chapter 2: modules</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<hr>
+
+<p class="first">True or False: A module’s file name must have the same name as the module it holds.</p>
+
+<p>True,
+<blockquote>
+<p class="quoted">When you create a new module you must name the file module_name.erl</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is it true that a file named little_erlanger.erl would have the module definition</p>
+
+<pre class="example">
+  -module(little_erlanger).
+</pre>
+
+<p>True,
+<blockquote>
+<p class="quoted">The module name must match the file name.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: The first line of code in a module should be the module name.</p>
+
+<p>True,
+<blockquote>
+<p class="quoted">The first line of code in a new module is the -module(). definition.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: After the module definition you should export all public functions.</p>
+
+<p>True,
+<blockquote>
+<p class="quoted">following your module definition you should export public functions.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Will the following definition export a function?</p>
+
+<pre class="example">
+  -export([double/1]).
+</pre>
+
+<p>True,
+<blockquote>
+<p class="quoted">the -export() function is how you will make a list of functions that are  publicly available outside of the module.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the function being exported?</p>
+
+<pre class="example">
+  -export([double/1]).
+</pre>
+
+<p>double/1,
+<blockquote>
+<p class="quoted">The name of the function being exported is double and the /1 means that it takes 1 argument.  This is called the arity of the function and is very important because you can name multiple functions double but give them all a different arity. We will discuss what the arity is a little later on.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: <code>-export()</code> takes a list as an argument</p>
+
+<p>True,
+<blockquote>
+<p class="quoted"><code>-export()</code> takes a list containing the functions that you would like to make public.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false:
+<blockquote>
+<p class="quoted">6 = double(3).</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">double(3) is a function that will multiply the argument by 2. You may also notice that it looks like we are assigning the value of double(3) to the number 6, while it appears this way that is a wrong assumption.  The = operator serves two purposes in erlang, it will assign a value to an unbound variable or it will act as a pattern matching operator if the value on the left hand side is a bound variable or number.  In this case the number 6 matches the value returned by double(3) and thus is true.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">How would you write the function double/1</p>
+
+<p>You were not expected to be able to answer that yet.  Let's look at how to do this now.</p>
+
+<hr>
+
+<pre class="example">
+-module(little_erlanger).
+-export([double/1]).
+
+double(X) -&gt;
+  X * 2.
+</pre>
+
+<p>What would the file name be for this module?</p>
+
+<p>little_erlanger.erl
+<blockquote>
+<p class="quoted">because the module is named little_erlanger</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What will the <code>-export([double/1]).</code> expression do?</p>
+
+<p>It will export the function double/1 making it available for use outside of the module.</p>
+
+<hr>
+
+<p class="first">What is the arity of double/1</p>
+
+<p>1,
+<blockquote>
+<p class="quoted">The arity of a function is the number of arguments that it takes.  double/1 has an arity of 1, which means that the definition of the function will only take 1 argument.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the head of the function</p>
+
+<pre class="example">
+  double(X) -&gt;
+    X * 2.
+</pre>
+
+<p>double(X),
+<blockquote>
+<p class="quoted">the head of the function is the function name and a clause used for pattern matching. In the case of double(X) the clause is X which is a variable that could match against any single argument passed to the function.  We will see how these clauses are more effectively used later on.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the body of</p>
+
+<pre class="example">
+  double(X) -&gt;
+    X * 2.
+</pre>
+
+<p>X * 2,
+<blockquote>
+<p class="quoted">The body of the function is the code that follows the -&gt;</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: double(X) -&gt; X * 2. will return the value of X * 2.</p>
+
+<p>True,
+<blockquote>
+<p class="quoted">The function will return the last result so there is no need to explicitly return any value.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: in the previous example X is a variable.</p>
+
+<p>True,
+<blockquote>
+<p class="quoted">X represents the argument passed into the function.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: in the previous example * is a math operator</p>
+
+<p>True,
+<blockquote>
+<p class="quoted">* is the multiplication operator and will multiply the variable X by the number 2.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What would be the steps for making an add() function in our module?</p>
+
+<p>Put the function name and arity in the -export() definition
+Put the function definition below* the -export() definition.</p>
+
+<hr>
+
+<p class="first">Is it true that our function name and arity would be
+<center>
+<p>add/2.</p>
+</center>
+
+<p>True,
+<blockquote>
+<p class="quoted">we want to take two number and add them together returning the answer to the caller.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: our new -export() definition will look like this</p>
+
+<pre class="example">
+  -export([double/1, add/2]).
+</pre>
+
+<p>True,
+<blockquote>
+<p class="quoted">our -export() definition now holds a list of two function names with their arity.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">This is the function add/2</p>
+
+<pre class="example">
+  add(X, Y) -&gt;
+    X + Y.
+</pre>
+
+<hr>
+
+<p class="first">How many arguments does add/2 take?</p>
+
+<p>Two,
+<blockquote>
+<p class="quoted">it takes a X and a Y argument.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What does add/2 do with those arguments?</p>
+
+<p>The function takes the X and Y argument and adds them together using the + operator.</p>
+
+<hr>
+
+<p class="first">What is the value returned to the caller?</p>
+
+<p>The value returned will be the result of adding the X and Y variables together.</p>
+
+<hr>
+
+<p class="first">True or false: We can write functions without using a module.</p>
+
+<p>True,
+<blockquote>
+<p class="quoted">we can write functions as anonymous functions.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: We can assign an anonymous function to a variable.</p>
+
+<p>True,
+<blockquote>
+<p class="quoted">we can assign an anonymous function to a variable in the same way that we assign other values to variables.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the variable Foo bound to in the following statement?</p>
+
+<pre class="example">
+  Foo = fun(X, Y) -&gt; X + Y end.
+</pre>
+
+<p>Foo is bound to an anonymous function that takes two arguments and adds them together.</p>
+
+<hr>
+
+<p class="first">True or false: We can call the anonymous function contained in Foo with the command
+<blockquote>
+<p class="quoted">Foo(2,3).</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">Foo now has an arity of 2 and can be called like a regular function with arguments.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: We can create an anonymous function that does what both the add/2 and the double/1 functions did.</p>
+
+<p>True,
+<blockquote>
+<p class="quoted">we can create an anonymous function that does pattern matching on the arguments and determines which function it’s supposed to act as.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">This is the anonymous function that acts as both* add/2 and double/1</p>
+
+<pre class="example">
+  MultiMath = fun({double, X}) -&gt; {double, X * 2};
+                 ({add, X, Y}) -&gt; {add, X + Y}
+              end.
+</pre>
+
+<p>it’s not best practice to do this with anonymous functions, this is simply to demonstrate how powerful they can be.</p>
+
+<hr>
+
+<p class="first">How can we have one function definition with multiple arity?</p>
+
+<p>We can’t,
+<blockquote>
+<p class="quoted">I cheated a little and replaced the normal arguments with an arity of /1 by using a tuple, notice the curly braces, to pass in multiple values to the function.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: The semicolon separates the possible patterns that could be matched for the function?</p>
+
+
+<p>True,
+<blockquote>
+<p class="quoted">the semicolon marks the end of each possible match.  Since we only have two possible matches we only have to use a semicolon at the end of the first possible match.  The second possible match has the regular end. statement.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the first possible match for MultiMath?</p>
+
+<p>{double, X},
+<blockquote>
+<p class="quoted">if a tuple beginning with the atom double, followed by a single argument is passed to MultiMath it will match the first clause and allow the body of that clause execute.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the second possible match for MultiMath?</p>
+
+<p>{add, X, Y},
+<blockquote>
+<p class="quoted">if a tuple beginning with the atom add, followed by two arguments separated by commas is passed to MultiMath it will first check against the first clause, since it doesn’t match the first clause it will try against the second clause and match, causing the body of the second clause to execute.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: We can call the anonymous function with the statement
+<blockquote>
+<p class="quoted">MultiMath(3, 4).</p>
+</blockquote>
+
+<p>False,
+<blockquote>
+<p class="quoted">the arity of MultiMath is /1 so passing two arguments will result in the following error.
+** exception error: interpreted function with arity 1 called with two arguments</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: We can call the anonymous function with the statement
+<blockquote>
+<p class="quoted">MultiMath({add, 3, 4}).</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">here we include a tuple with the atom add followed by the numbers 3 and 4.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is it true that our returned value will also be a tuple?</p>
+
+<p>True,
+<blockquote>
+<p class="quoted">it becomes standard practice later on to primarily return a tuple from functions that have a leading atom.  This is normally an atom that let’s you know if the function performed correctly and will return a tuple that looks like {ok, Value} if a function was able to process the arguments successfully.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the returned value from the statement
+<blockquote>
+<p class="quoted">MultiMath({double, 7}).</p>
+</blockquote>
+
+<p>{double, 14}.</p>
+
+<hr>
+
+<p class="first">What is the returned value from the statement
+<blockquote>
+<p class="quoted">MultiMath({add, 3, 4}).</p>
+</blockquote>
+
+<p>{add, 7}.</p>
+
+<hr>
+
+<p class="first">Can we write a non-anonymous function in our module that behaves like the MultiMath anonymous function?</p>
+
+<p>Yes,
+<blockquote>
+<p class="quoted">it would look like this.</p>
+</blockquote>
+
+<pre class="example">
+multimath({add, X, Y}) -&gt;
+	{add, X + Y};
+multimath({double, X}) -&gt;
+	{double, X * 2}.
+</pre>
+
+<hr>
+
+<p class="first">Is it true that we can add the multimath/1 function to our module and have it available for use right away?</p>
+
+<p>False,
+<blockquote>
+<p class="quoted">first we need to add it to our -export() definition.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What will our -export() definition look like now?</p>
+
+<pre class="example">
+  -export([double/1, add/2, multimath/1]).
+</pre>
+<hr>
+
+<p class="first">Why does multimath have an arity of 1?</p>
+
+<p>Because it only takes 1 argument, a tuple</p>
+
+<hr>
+
+<p class="first">The entire module now looks like this</p>
+
+<pre class="example">
+-module(little_erlanger).
+-export([double/1, add/2, multimath/1]).
+
+double(X) -&gt;
+  X * 2.
+
+add(X, Y) -&gt;
+  X + Y.
+
+multimath({add, X, Y}) -&gt;
+  {add, X + Y};
+multimath({double, X}) -&gt;
+  {double, X * 2}.
+</pre>
+
+<hr>
+
+<p class="first">Time for a break!</p>
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>

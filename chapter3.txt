@@ -1,0 +1,22 @@
+#title Chapter 3
+
+What does the following function do?
+     add(X, Y) when is_integer(X), is_integer(Y) -> X + Y.
+
+add/2 will only add together X and Y if they are both integers.
+
+----
+
+How does *add/2* know if X and Y are integers?
+
+add/2 uses two guards to perform checks on the variables. A guard is a way to test a variable being passed to a function.  In the case of add/2, the guard being used is the BIF(built in function) is_integer which will return true if the variable is an integer and false if it is not. We can add guards to function definitions by using the key word "when" followed by the guard or guard sequence that we would like to perform.
+
+----
+
+Does add/2 use a guard or guard sequence?
+
+add/2 uses a guard sequence since it uses two tests.  You separate these tests with commas.
+
+----
+
+
