@@ -1,350 +1,368 @@
-Chapter 2: modules
+#title Chapter 2: modules
 
-
----
+----
 
 True or False: A module’s file name must have the same name as the module it holds.
 
 True,
-	When you create a new module you must name the file module_name.erl
----
+  When you create a new module you must name the file module_name.erl
+
+----
 
 Is it true that a file named little_erlanger.erl would have the module definition 
-	-module(little_erlanger).
+<example>
+  -module(little_erlanger).
+</example>
 
 True,
-	The module name must match the file name.
+  The module name must match the file name.
 
----
+----
 
 True or false: The first line of code in a module should be the module name.
 
 True,
-	The first line of code in a new module is the -module(). definition. 
+  The first line of code in a new module is the -module(). definition. 
 
----
+----
 
 True or false: After the module definition you should export all public functions.
 
 True,
-	following your module definition you should export public functions. 
+  following your module definition you should export public functions. 
 
----
+----
+
 Will the following definition export a function?
-	-export([double/1]).
+<example>
+  -export([double/1]).
+</example>
 
 True,
-	the -export() function is how you will make a list of functions that are  publicly available outside of the module.
+  the -export() function is how you will make a list of functions that are  publicly available outside of the module.
 
-
----
+----
 
 What is the function being exported?
-	-export([double/1]).
+<example>
+  -export([double/1]).
+</example>
 
 double/1,
-	The name of the function being exported is double and the /1 means that it takes 1 argument.  This is called the arity of the function and is very important because you can name multiple functions double but give them all a different arity. We will discuss what the arity is a little later on.
+  The name of the function being exported is double and the /1 means that it takes 1 argument.  This is called the arity of the function and is very important because you can name multiple functions double but give them all a different arity. We will discuss what the arity is a little later on.
 
----
-True or false: export() takes a list as an argument
+----
+
+True or false: <code>-export()</code> takes a list as an argument
 
 True,
-	export() take a list containing the functions that you would like to make public.
+  <code>-export()</code> takes a list containing the functions that you would like to make public.
 
----
+----
 
 True or false: 
-	6 = double(3).
+  6 = double(3).
 
 True,
-	double(3) is a function that will multiply the argument by 2. You may also notice that it looks like we are assigning the value of double(3) to the number 6, while it appears this way that is a wrong assumption.  The = operator serves two purposes in erlang, it will assign a value to an unbound variable or it will act as a pattern matching operator if the value on the left hand side is a bound variable or number.  In this case the number 6 matches the value returned by double(3) and thus is true.
+  double(3) is a function that will multiply the argument by 2. You may also notice that it looks like we are assigning the value of double(3) to the number 6, while it appears this way that is a wrong assumption.  The = operator serves two purposes in erlang, it will assign a value to an unbound variable or it will act as a pattern matching operator if the value on the left hand side is a bound variable or number.  In this case the number 6 matches the value returned by double(3) and thus is true.
 
----
+----
 
 How would you write the function double/1
 
 You were not expected to be able to answer that yet.  Let's look at how to do this now.
 
----
+----
 
+<example>
 -module(little_erlanger).
 -export([double/1]).
 
 double(X) ->
-	X * 2.
+  X * 2.
+</example>
 
 What would the file name be for this module?
 
 little_erlanger.erl
-	because the module is named little_erlanger
+  because the module is named little_erlanger
 
----
+----
 
-What will the -export([double/1]). expression do?
+What will the <code>-export([double/1]).</code> expression do?
 
 It will export the function double/1 making it available for use outside of the module.
 
----
+----
 
 What is the arity of double/1
 
 1,
-	The arity of a function is the number of arguments that it takes.  double/1 has an arity of 1, which means that the definition of the function will only take 1 argument.
----
+  The arity of a function is the number of arguments that it takes.  double/1 has an arity of 1, which means that the definition of the function will only take 1 argument.
+
+----
 
 What is the head of the function
-	double(X) ->
-		X * 2.
+<example>
+  double(X) ->
+    X * 2.
+</example>
 
 double(X),
-	the head of the function is the function name and a clause used for pattern matching. In the case of double(X) the clause is X which is a variable that could match against any single argument passed to the function.  We will see how these clauses are more effectively used later on.
+  the head of the function is the function name and a clause used for pattern matching. In the case of double(X) the clause is X which is a variable that could match against any single argument passed to the function.  We will see how these clauses are more effectively used later on.
 
----
+----
 
 What is the body of 
-	double(X) ->
-		X * 2.
+<example>
+  double(X) ->
+    X * 2.
+</example>
 
 X * 2,
-	The body of the function is the code that follows the ->
+  The body of the function is the code that follows the ->
 
----
+----
 
 True or false: double(X) -> X * 2. will return the value of X * 2.
 
 True,
-	The function will return the last result so there is no need to explicitly return any value.
+  The function will return the last result so there is no need to explicitly return any value.
 
----
+----
 
 True or false: in the previous example X is a variable.
 
 True,
-	X represents the argument passed into the function.
+  X represents the argument passed into the function.
 
----
+----
 
 True or false: in the previous example * is a math operator
 
 True,
-	* is the multiplication operator and will multiply the variable X by the number 2.
+  * is the multiplication operator and will multiply the variable X by the number 2.
 
----
+----
 
 What would be the steps for making an add() function in our module?	
 
 Put the function name and arity in the -export() definition
 Put the function definition below* the -export() definition.  
 
-
-
----
+----
 
 Is it true that our function name and arity would be
 	add/2.
 
 True,
-	we want to take two number and add them together returning the answer to the caller.
+  we want to take two number and add them together returning the answer to the caller.
 
----
+----
 
 True or false: our new -export() definition will look like this
-	-export([double/1, add/2]).
+<example>
+  -export([double/1, add/2]).
+</example>
 
 True,
-	our -export() definition now holds a list of two function names with their arity.
----
+  our -export() definition now holds a list of two function names with their arity.
+
+----
 
 This is the function add/2
+<example>
+  add(X, Y) ->
+    X + Y.
+</example>
 
-add(X, Y) ->
-	X + Y.
-
----
+----
 
 How many arguments does add/2 take?
 
 Two,
-	it takes a X and a Y argument.
+  it takes a X and a Y argument.
 
----
+----
 
 What does add/2 do with those arguments?
 
 The function takes the X and Y argument and adds them together using the + operator.
 
----
+----
 
 What is the value returned to the caller?
 
 The value returned will be the result of adding the X and Y variables together.
 
----
+----
 
 True or false: We can write functions without using a module.
 
 True,
-	we can write functions as anonymous functions.
+  we can write functions as anonymous functions.
 
----
+----
 
 True or false: We can assign an anonymous function to a variable.
 
 True,
-	we can assign an anonymous function to a variable in the same way that we assign other values to variables.
+  we can assign an anonymous function to a variable in the same way that we assign other values to variables.
 
----
-
-
-
+----
 
 What is the variable Foo bound to in the following statement?
-	Foo = fun(X, Y) -> X + Y end.
+<example>
+  Foo = fun(X, Y) -> X + Y end.
+</example>
 
 Foo is bound to an anonymous function that takes two arguments and adds them together.
 
----
+----
 
 True or false: We can call the anonymous function contained in Foo with the command
-	Foo(2,3).
+  Foo(2,3).
 
 True,
-	Foo now has an arity of 2 and can be called like a regular function with arguments.
+  Foo now has an arity of 2 and can be called like a regular function with arguments.
 
----
+----
 
 True or false: We can create an anonymous function that does what both the add/2 and the double/1 functions did.
 
 True,
-	we can create an anonymous function that does pattern matching on the arguments and determines which function it’s supposed to act as.
+  we can create an anonymous function that does pattern matching on the arguments and determines which function it’s supposed to act as.
 
----
+----
 
 This is the anonymous function that acts as both* add/2 and double/1
-
-MultiMath = fun({double, X}) -> {double, X * 2};
-                         ({add, X, Y}) -> {add, X + Y}
-                    end.
+<example>
+  MultiMath = fun({double, X}) -> {double, X * 2};
+                 ({add, X, Y}) -> {add, X + Y}
+              end.
+</example>
 
 it’s not best practice to do this with anonymous functions, this is simply to demonstrate how powerful they can be.
 
----
-
+----
 
 How can we have one function definition with multiple arity?
 
 We can’t,
-	I cheated a little and replaced the normal arguments with an arity of /1 by using a tuple, notice the curly braces, to pass in multiple values to the function.
+  I cheated a little and replaced the normal arguments with an arity of /1 by using a tuple, notice the curly braces, to pass in multiple values to the function.
 
----
+----
 
 True or false: The semicolon separates the possible patterns that could be matched for the function?
 
 
 True,
-	the semicolon marks the end of each possible match.  Since we only have two possible matches we only have to use a semicolon at the end of the first possible match.  The second possible match has the regular end. statement.
+  the semicolon marks the end of each possible match.  Since we only have two possible matches we only have to use a semicolon at the end of the first possible match.  The second possible match has the regular end. statement.
 
----
+----
 
 What is the first possible match for MultiMath?
 
 {double, X},
-	if a tuple beginning with the atom double, followed by a single argument is passed to MultiMath it will match the first clause and allow the body of that clause execute.
+  if a tuple beginning with the atom double, followed by a single argument is passed to MultiMath it will match the first clause and allow the body of that clause execute.
 
----
+----
 
 What is the second possible match for MultiMath?
 
 {add, X, Y},
-	if a tuple beginning with the atom add, followed by two arguments separated by commas is passed to MultiMath it will first check against the first clause, since it doesn’t match the first clause it will try against the second clause and match, causing the body of the second clause to execute.
+  if a tuple beginning with the atom add, followed by two arguments separated by commas is passed to MultiMath it will first check against the first clause, since it doesn’t match the first clause it will try against the second clause and match, causing the body of the second clause to execute.
 
----
+----
 
 True or false: We can call the anonymous function with the statement
-	MultiMath(3, 4).
+  MultiMath(3, 4).
 
 False,
-	the arity of MultiMath is /1 so passing two arguments will result in the following error.
-	** exception error: interpreted function with arity 1 called with two arguments
+  the arity of MultiMath is /1 so passing two arguments will result in the following error.
+  ** exception error: interpreted function with arity 1 called with two arguments
 	
----
+----
 
 True or false: We can call the anonymous function with the statement
-	MultiMath({add, 3, 4}).
+  MultiMath({add, 3, 4}).
 
 True,
-	here we include a tuple with the atom add followed by the numbers 3 and 4.
+  here we include a tuple with the atom add followed by the numbers 3 and 4.
 
----
+----
 
 Is it true that our returned value will also be a tuple?
 
 True,
-	it becomes standard practice later on to primarily return a tuple from functions that have a leading atom.  This is normally an atom that let’s you know if the function performed correctly and will return a tuple that looks like {ok, Value} if a function was able to process the arguments successfully.
+  it becomes standard practice later on to primarily return a tuple from functions that have a leading atom.  This is normally an atom that let’s you know if the function performed correctly and will return a tuple that looks like {ok, Value} if a function was able to process the arguments successfully.
 
----
+----
 
 What is the returned value from the statement
-	MultiMath({double, 7}).
+  MultiMath({double, 7}).
 
 {double, 14}.
 
----
+----
 
 What is the returned value from the statement
-	MultiMath({add, 3, 4}).
+  MultiMath({add, 3, 4}).
 
 {add, 7}.
 
----
+----
 
 Can we write a non-anonymous function in our module that behaves like the MultiMath anonymous function?
 
 Yes,
-	it would look like this.
-
+  it would look like this.
+<example>
 multimath({add, X, Y}) ->
 	{add, X + Y};
 multimath({double, X}) ->
 	{double, X * 2}.
+</example>
 
----
+----
 
 Is it true that we can add the multimath/1 function to our module and have it available for use right away?
 
 False,
-	first we need to add it to our -export() definition.
+  first we need to add it to our -export() definition.
 
----
+----
 
 What will our -export() definition look like now?
-
--export([double/1, add/2, multimath/1]).
-
----
+<example>
+  -export([double/1, add/2, multimath/1]).
+</example>
+----
 
 Why does multimath have an arity of 1?
 
 Because it only takes 1 argument, a tuple
 
----
+----
 
 The entire module now looks like this
 
+<example>
 -module(little_erlanger).
 -export([double/1, add/2, multimath/1]).
 
 double(X) ->
-	X * 2.
+  X * 2.
 
 add(X, Y) ->
-	X + Y.
+  X + Y.
 
 multimath({add, X, Y}) ->
-	{add, X + Y};
+  {add, X + Y};
 multimath({double, X}) ->
-	{double, X * 2}.
+  {double, X * 2}.
+</example>
 
----
+----
 
 Time for a break!

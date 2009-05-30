@@ -1,0 +1,833 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <title>Chapter 1: atoms and lists</title>
+    <meta name="generator" content="muse.el">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=utf-8">
+    <style type="text/css">
+body {
+  background: white; color: black;
+  margin-left: 3%; margin-right: 7%;
+}
+
+p { margin-top: 1% }
+p.verse { margin-left: 3% }
+
+.example { margin-left: 3% }
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 0px;
+}
+h3 { margin-bottom: 0px; }
+    </style>
+  </head>
+  <body>
+    <h1>Chapter 1: atoms and lists</h1>
+    <!-- Page published by Emacs Muse begins here -->
+<p>Is it true that this is an atom?
+<blockquote>
+<p class="quoted">dog.</p>
+</blockquote>
+
+<p>Yes, because dog is a string of characters
+beginning with the letter d.</p>
+
+<hr>
+
+<p class="first">Is it true that this is an atom?
+<blockquote>
+<p class="quoted">john.</p>
+</blockquote>
+
+<p>Yes, because john is a string of characters
+beginning with a letter.</p>
+
+<hr>
+
+<p class="first">Is it true that this is an atom?
+<blockquote>
+<p class="quoted">h.</p>
+</blockquote>
+
+<p>Yes, because h is a string of one character,
+which is a letter.</p>
+
+<hr>
+
+<p class="first">Is it true that this is an atom?
+<blockquote>
+<p class="quoted">'<em>abc$'.</p>
+</blockquote>
+
+<p>Yes, because surrounding any character string
+with single quotes makes it an atom.</p>
+
+<hr>
+
+<p class="first">Is it true that Foo is an atom?</p>
+
+<p>False,
+<blockquote>
+<p class="quoted">A string of characters starting with an upper case letter is
+a variable.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is it true that Foo is bound to the atom john in
+<blockquote>
+<p class="quoted">Foo = john.</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">Foo is bound to the atom john by using the = operator.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">If Foo is bound to john, is the following statement true?
+<blockquote>
+<p class="quoted">Foo = chicken.</p>
+</blockquote>
+
+<p>False,
+<blockquote>
+<p class="quoted">variables can only be assigned once.  This is called single assignment. Once Foo is bound to the atom john it cannot be rebound to another value</em>.</p>
+</blockquote>
+
+
+<p class="footnote"><a class="footnum" name="fn.1" href="#fnr.1">1.</a>In some cases I will reuse a variable in separate examples which would require rebinding it.  If you are following along at the REPL and you have a variable called Head you can make the variable unbound by using the command f(Head).  This should only be used for testing purposes at the REPL and should never be used in an attempt to override single assignment variables.</p>
+
+<hr>
+
+<p class="first">Is it true that this is a tuple?
+<blockquote>
+<p class="quoted">{john, likes, erlang}.</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">a tuple is a way to store a known number of terms by enclosing them in curly braces.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is it true that this is a tuple?
+<blockquote>
+<p class="quoted">{john}.</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">it is an atom enclosed by curly braces which makes it a tuple.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is it true that this is a tuple?
+<blockquote>
+<p class="quoted">{john, {really, likes}, erlang}.</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">a tuple can hold any erlang term.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: We can store tuples in variables
+<blockquote>
+<p class="quoted">Foo = {this, is, a, tuple}.</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">variables can hold any erlang term, which includes tuples.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: We can build tuples that hold variables
+<blockquote>
+<p class="quoted">Foo = {this, is, a, tuple}.
+Bar = {another, tuple, Foo}.</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">since a tuple can hold any erlang term, we can put variables into tuples as well. This example would expand to. {another, tuple, {this, is, a, tuple}}.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the value of Foo where
+<blockquote>
+<p class="quoted">{john, likes, Foo} = {john, likes, erlang}.</p>
+</blockquote>
+
+<p>erlang,
+<blockquote>
+<p class="quoted">we can extract all or some of the values from a tuple using pattern matching. In this case john and likes are the same on both sides, however we have the variable Foo on the left hand side which matches to the atom erlang on the right hand side.  This will assign the atom erlang to the variable Foo.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the value of Foo where
+<blockquote>
+<p class="quoted">{another, tuple, Foo} = {another, tuple, {this, is, a, tuple}}.</p>
+</blockquote>
+
+<p>{this, is, a, tuple},
+<blockquote>
+<p class="quoted">since the last term in the tuple on the right is another tuple, it will become bound to Foo if Foo is an unbound variable.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">If Foo is bound to the tuple {this, is, a, tuple} what is the outcome of the following statement?
+<blockquote>
+<p class="quoted">{Foo, tuple, {this, is, a, tuple}} = {another, tuple, {this, is, a, tuple}}.</p>
+</blockquote>
+
+<p>Error!,
+<blockquote>
+<p class="quoted">you will receive an error that looks something like this
+** exception error: no match of right hand side value {another,tuple,
+{this,is,a,tuple}}
+because the expression is trying to match the bound variable Foo, which is assigned the tuple {this, is, a, tuple},  with the atom another. If you tried to do this by itself it would look like
+{this, is, a, tuple} = another.
+which is obviously not a match.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">True or false: We can ignore some elements of a tuple while extracting others by using
+<blockquote>
+<p class="quoted">{_, <u>, Foo} = {another, super, tuple}.</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">by using the anonymous variable </u> we can let the interpreter know that we don’t care about the first or second values of the tuple and that we only want the third term.  We will discuss anonymous variables a little later on.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is it true that this is a list?
+<blockquote>
+<p class="quoted">[atom].</p>
+</blockquote>
+
+<p>Yes, because [atom] is an atom enclosed by
+square brackets</p>
+
+<hr>
+
+<p class="first">Is it true that this is a list?
+<blockquote>
+<p class="quoted">[atom, turkey, org].</p>
+</blockquote>
+
+<p>Yes, because it is a collection of atoms,
+separated by commas and enclosed by
+square brackets.</p>
+
+<hr>
+
+<p class="first">Is it true that this is a list?
+<blockquote>
+<p class="quoted">[atom, turkey], org.</p>
+</blockquote>
+
+<p>No, because these are two separate
+terms not enclosed by square
+brackets.  The first one is a list containing
+two atoms, and the second one is an atom.</p>
+
+<hr>
+
+<p class="first">Is it true that this is a list?
+<blockquote>
+<p class="quoted">[[atom, turkey], org].</p>
+</blockquote>
+
+<p>Yes, because the two terms are now enclosed
+by square brackets.</p>
+
+<hr>
+
+<p class="first">Is it true that this is a term?
+<blockquote>
+<p class="quoted">xyz.</p>
+</blockquote>
+
+<p>Yes, because all atoms are terms.</p>
+
+<hr>
+
+<p class="first">Is it true that this is a term?
+<blockquote>
+<p class="quoted">[x,y,z].</p>
+</blockquote>
+
+<p>Yes, because it is a list.</p>
+
+<hr>
+
+<p class="first">Is it true that this is a term?
+<blockquote>
+<p class="quoted">[[x,y],z].</p>
+</blockquote>
+
+<p>Yes, because all lists are terms.</p>
+
+<hr>
+
+<p class="first">Is it true that this is a list?
+<blockquote>
+<p class="quoted">[erlang, is, great].</p>
+</blockquote>
+
+<p>Yes, because it is a collection of terms
+enclosed by square brackets.</p>
+
+<hr>
+
+<p class="first">How many terms are in the list
+<blockquote>
+<p class="quoted">[erlang, is, great].</p>
+</blockquote>
+
+<p>Three,
+each of the atoms in the list are a term</p>
+
+<hr>
+
+<p class="first">Is it true that this is a list?
+<blockquote>
+<p class="quoted">[[[how], are], [[you], [doing, so]], far].</p>
+</blockquote>
+
+<p>Yes, because it is a collection of terms
+enclosed by square brackets.</p>
+
+<hr>
+
+<p class="first">How many terms are in the list
+<blockquote>
+<p class="quoted">[[[how], are], [[you], [doing, so]], far].
+and what are they?</p>
+</blockquote>
+
+<p>Three,
+[[how], are]
+[[you], [doing, so]]
+and far</p>
+
+<hr>
+
+<p class="first">Is it true that this is a list?
+<blockquote>
+<p class="quoted">[].</p>
+</blockquote>
+
+<p>Yes, square brackets by themselves create an
+empty list.</p>
+
+<hr>
+
+<p class="first">Is it true that this is an atom?
+<blockquote>
+<p class="quoted">[].</p>
+</blockquote>
+
+<p>No, because [] is just a list.</p>
+
+<hr>
+
+<p class="first">Is it true that this is a list?
+<blockquote>
+<p class="quoted">[[],[],[],[]].</p>
+</blockquote>
+
+<p>Yes, because it is a collection of
+empty lists.</p>
+
+<hr>
+
+<p class="first">What is the value of Head where
+<blockquote>
+<p class="quoted">[Head|_] = [a,b,c].</p>
+</blockquote>
+
+<p>a, because a is the first atom of
+this list.</p>
+
+<hr>
+
+<p class="first">What is the value of Head where
+<blockquote>
+<p class="quoted">[Head|_] = [[a,b,c], x,y,z].</p>
+</blockquote>
+
+<p>[a,b,c], because [a,b,c] is the first
+term of this non-empty list.</p>
+
+<hr>
+
+<p class="first">What is the value of Head where
+<blockquote>
+<p class="quoted">[Head|_] = hotdog.</p>
+</blockquote>
+
+<p>No answer, you cannot ask for the head of
+an atom.</p>
+
+<hr>
+
+<p class="first">What is the value of Head where
+<blockquote>
+<p class="quoted">[Head|_] = [].</p>
+</blockquote>
+
+<p>No answer, You cannot ask for the head of
+an empty list.</p>
+
+<hr>
+
+<p class="first">What is the value of Head where
+<blockquote>
+<p class="quoted">[Head|_] = [<a href="hotdogs">hotdogs</a>, ['and'], [pickle], relish].</p>
+</blockquote>
+
+<p><a href="hotdogs">hotdogs</a>, read as:
+&quot;The list of the list of hotdogs&quot;
+<a href="hotdogs">hotdogs</a> is the first term of the list.</p>
+
+<hr>
+
+<p class="first">What is the value of Head where</p>
+
+<table class="muse-table" border="2" cellpadding="5">
+  <tbody>
+    <tr>
+      <td>[ [ Head</td>
+      <td>_ ]</td>
+      <td>_ ] = [<a href="hotdogs">hotdogs</a>, ['and']].</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>[hotdogs]</p>
+
+<hr>
+
+<p class="first">What is the value of Tail where
+<blockquote>
+<p class="quoted">[<u>|Tail] = [a,b,c].</p>
+</blockquote>
+
+<p>[b,c],
+<blockquote>
+<p class="quoted">because [b,c] is the list without [Head|</u>].</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the value of Tail where
+[<u>|Tail] = [[a,b,c], x,y,z].</p>
+
+<p>[x,y,z]</p>
+
+<hr>
+
+<p class="first">What is the value of Tail where
+[</u>|Tail] = hotdogs.</p>
+
+<p>No answer,
+<blockquote>
+<p class="quoted">You cannot ask for the Tail of an atom.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the value of Tail where
+<blockquote>
+<p class="quoted">[<u>|Tail] = [].</p>
+</blockquote>
+
+<p>No answer,
+<blockquote>
+<p class="quoted">You cannot ask for the Tail of an empty list.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the value of Head where</p>
+
+<table class="muse-table" border="2" cellpadding="5">
+  <tbody>
+    <tr>
+      <td>[ </u></td>
+      <td>[ Head</td>
+      <td>Tail ] ] = [[b], [x,y], <a href="c">c</a>].</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>[x,y],
+<blockquote>
+<p class="quoted">because [[x,y], <a href="c">c</a>] is the [<u>|Tail] of the list, and [x,y] is
+the [Head|</u>] of that Tail.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the value of Tail where
+<blockquote>
+<p class="quoted">[<u>|[</u>|Tail]] = [[b], [x,y], <a href="c">c</a>].</p>
+</blockquote>
+
+<p>[<a href="c">c</a>],
+<blockquote>
+<p class="quoted">because [[x,y], <a href="c">c</a>] is the [<u>|Tail], and [<a href="c">c</a>] is
+the [</u>|Tail] of that Tail.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the value of Tail where
+<blockquote>
+<p class="quoted">[[<u>|Tail]|</u>] = [a, [b, [c]], d].</p>
+</blockquote>
+
+<p>No answer,
+<blockquote>
+<p class="quoted">since [<u>|Tail] is the Head of the list and the Head of [a, [b, [c]], d]
+is an atom, and [</u>|Tail] does not take an atom as an argument.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What does [Head|_] match against?</p>
+
+<p>It will match against any non-empty list.</p>
+
+<hr>
+
+<p class="first">What does [<u>|Tail] match against?</p>
+
+<p>It will match against any non-empty list.</p>
+
+<hr>
+
+<p class="first">What is the value of </u> where
+<blockquote>
+<p class="quoted">[<u>|Tail] = [a,b,c].</p>
+</blockquote>
+
+<p>Nothing,
+<blockquote>
+<p class="quoted"></u> is an anonymous variable used in pattern matching when a variable is
+required but it’s value can be ignored. It has been used in our examples of
+[Head|_] and [<u>|Tail].  In these cases we have not cared about the value
+where </u> is used so we chose to use an anonymous variable and ignore the
+value.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the resulting list when you add the atom peanut to the beginning of the list 	[butter, ‘and’, jelly]
+This can be written as</p>
+
+<table class="muse-table" border="2" cellpadding="5">
+  <tbody>
+    <tr>
+      <td>[peanut</td>
+      <td>[butter, ‘and’, jelly]].</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>[peanut, butter, ‘and’, jelly],
+<blockquote>
+<p class="quoted">because adding peanut to the [Head|_] position will add it onto the existing list.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">What is the resulting list when you add the atom jelly to the end of the list
+<blockquote>
+<p class="quoted">[peanut, butter, ‘and’]
+This can be written as</p>
+</blockquote>
+
+<table class="muse-table" border="2" cellpadding="5">
+  <tbody>
+    <tr>
+      <td>[[peanut, butter, ‘and’]</td>
+      <td>jelly].</td>
+    </tr>
+    <tr>
+      <td>[[peanut, butter, ‘and’]</td>
+      <td>jelly],</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+<p class="quoted">because adding jelly to the [<u>|Tail] of the list will only create a new list with two 	terms, the old list and the atom jelly, it will not create a unified list as it does
+when you add something on to the [Head|</u>] of the list.
+<hr></p>
+</blockquote>
+
+<p>How can we create a flat list using an atom and a list?</p>
+
+<table class="muse-table" border="2" cellpadding="5">
+  <tbody>
+    <tr>
+      <td>[term</td>
+      <td>list],</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+<p class="quoted">because adding an atom to the [Head|_] of a list will create a new flat list. You can add any valid term to the head of the list, it is not restricted to atoms.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">How can we create a new list that contains a list and an atom?</p>
+
+<table class="muse-table" border="2" cellpadding="5">
+  <tbody>
+    <tr>
+      <td>[list</td>
+      <td>atom],</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+<p class="quoted">because adding an atom to the [_|Tail] of a list will create a new list containing
+a list and an atom.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is is_atom(S) true or false where
+<blockquote>
+<p class="quoted">S = harry.</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">because is_atom(S) is just another way to ask “Is S an atom?”</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is is_atom(S) true or false where
+<blockquote>
+<p class="quoted">S = [harry, had, a, heap, ‘of’, apples].</p>
+</blockquote>
+
+<p>False,
+<blockquote>
+<p class="quoted">since S is a list.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">How many arguments does is_atom() take and what are they?</p>
+
+<p>It takes one argument.  The argument can be any term.</p>
+
+<hr>
+
+<p class="first">Is is_atom(Head) true or false where
+<blockquote>
+<p class="quoted">[Head|_] = [harry,  had, a, heap, ‘of’, apples].</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">because the Head of the list would be the atom harry.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is is_atom(Tail) true or false where
+<blockquote>
+<p class="quoted">[_|Tail] = [harry,  had, a, heap, ‘of’, apples].</p>
+</blockquote>
+
+<p>False,
+<blockquote>
+<p class="quoted">because the Tail of the list would be a list.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is is_atom(Tail) true or false where
+<blockquote>
+<p class="quoted">[_|Tail] = [harry].</p>
+</blockquote>
+
+<p>False,
+<blockquote>
+<p class="quoted">because the list [] is not an atom.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is is_atom(Head) true or false where</p>
+
+<table class="muse-table" border="2" cellpadding="5">
+  <tbody>
+    <tr>
+      <td>[ _</td>
+      <td>[ Head</td>
+      <td>_ ] ] = [swing, low, sweet, cherry, oat].</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>True,
+<blockquote>
+<p class="quoted">because the Head of the [_|Tail] would be the atom low.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is is_atom(Head) true or false where</p>
+
+<table class="muse-table" border="2" cellpadding="5">
+  <tbody>
+    <tr>
+      <td>[ _</td>
+      <td>[ Head</td>
+      <td>_ ] ] = [swing, [low, sweet], cherry, oat].</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>False,
+<blockquote>
+<p class="quoted">because the Head of [_|Tail] would be the list [low, sweet].</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is is_list(S) true or false where
+<blockquote>
+<p class="quoted">S = harry.</p>
+</blockquote>
+
+<p>False,
+<blockquote>
+<p class="quoted">because is_list(S) is just another way to ask “Is S a list?”</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is is_list(S) true or false where
+<blockquote>
+<p class="quoted">S = [harry, had, a, heap, ‘of’, apples].</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">since S is a list.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">How many arguments does is_list() take and what are they?</p>
+
+<p>It takes one argument.  The argument can be any term.</p>
+
+<hr>
+
+<p class="first">Is is_list(Head) true or false where
+<blockquote>
+<p class="quoted">[Head|_] = [harry,  had, a, heap, ‘of’, apples].</p>
+</blockquote>
+
+<p>False,
+<blockquote>
+<p class="quoted">because the Head of the list would be the atom harry.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is is_list(Tail) true or false where
+<blockquote>
+<p class="quoted">[_|Tail] = [harry,  had, a, heap, ‘of’, apples].</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">because Tail would be the list [had, a, heap, ‘of’, apples].</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is is_list(Tail) true or false where
+<blockquote>
+<p class="quoted">[_|Tail] = [harry].</p>
+</blockquote>
+
+<p>True,
+<blockquote>
+<p class="quoted">because Tail would be [] which is an empty list.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is is_list(Head) true or false where</p>
+
+<table class="muse-table" border="2" cellpadding="5">
+  <tbody>
+    <tr>
+      <td>[ _</td>
+      <td>[ Head</td>
+      <td>_ ] ] = [swing, low, sweet, cherry, oat].</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>False,
+<blockquote>
+<p class="quoted">because the Head of the [_|Tail] would be the atom low.</p>
+</blockquote>
+
+<hr>
+
+<p class="first">Is is_list(Head) true or false where</p>
+
+<table class="muse-table" border="2" cellpadding="5">
+  <tbody>
+    <tr>
+      <td>[ _</td>
+      <td>[ Head</td>
+      <td>_ ] ] = [swing, [low, sweet], cherry, oat].</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>True,
+<blockquote>
+<p class="quoted">because the Head of [_|Tail] would be the list [low, sweet].</p>
+</blockquote>
+
+<hr>
+
+<!-- Page published by Emacs Muse ends here -->
+  </body>
+</html>

@@ -1,4 +1,4 @@
-Chapter 1: atoms and lists
+#title Chapter 1: atoms, tuples and lists
 
 
 Is it true that this is an atom?
@@ -7,7 +7,7 @@ Is it true that this is an atom?
 Yes, because dog is a string of characters
 beginning with the letter d.
 
----
+----
 
 Is it true that this is an atom?
   john.
@@ -15,7 +15,7 @@ Is it true that this is an atom?
 Yes, because john is a string of characters
 beginning with a letter.
 
----
+----
 
 Is it true that this is an atom?
   h.
@@ -23,7 +23,7 @@ Is it true that this is an atom?
 Yes, because h is a string of one character,
 which is a letter.
 
----
+----
 
 Is it true that this is an atom?
   '*abc$'.
@@ -31,114 +31,112 @@ Is it true that this is an atom?
 Yes, because surrounding any character string
 with single quotes makes it an atom.
 
----
+----
 
 Is it true that Foo is an atom?
 
 False,
-	A string of characters starting with an upper case letter is
-	a variable.
+  A string of characters starting with an upper case letter is
+  a variable.
 
-
----
-
-
+----
 
 Is it true that Foo is bound to the atom john in
-	Foo = john.
+  Foo = john.
 
 True,
-	Foo is bound to the atom john by using the = operator.
+  Foo is bound to the atom john by using the = operator.
 
----
+----
 
 If Foo is bound to john, is the following statement true?
-	Foo = chicken.
+  Foo = chicken.
 
 False,
-	variables can only be assigned once.  This is called single assignment. Once Foo is bound to the atom john it cannot be rebound to another value*.
+  variables can only be assigned once.  This is called single assignment. Once Foo is bound to the atom john it cannot be rebound to another value*.
 
 
-* In some cases I will reuse a variable in separate examples which would require rebinding it.  If you are following along at the REPL and you have a variable called Head you can make the variable unbound by using the command f(Head).  This should only be used for testing purposes at the REPL and should never be used in an attempt to override single assignment variables.
+[1]In some cases I will reuse a variable in separate examples which would require rebinding it.  If you are following along at the REPL and you have a variable called Head you can make the variable unbound by using the command f(Head).  This should only be used for testing purposes at the REPL and should never be used in an attempt to override single assignment variables.
 
----
-
-Is it true that this is a tuple?
-	{john, likes, erlang}.
-
-True,
-	a tuple is a way to store a known number of terms by enclosing them in curly braces.
-
----
+----
 
 Is it true that this is a tuple?
-	{john}.
+  {john, likes, erlang}.
 
 True,
-	it is an atom enclosed by curly braces which makes it a tuple.
+  a tuple is a way to store a known number of terms by enclosing them in curly braces.
 
----
+----
 
 Is it true that this is a tuple?
-	{john, {really, likes}, erlang}.
+  {john}.
 
 True,
-	a tuple can hold any erlang term.
----
+  it is an atom enclosed by curly braces which makes it a tuple.
+
+----
+
+Is it true that this is a tuple?
+  {john, {really, likes}, erlang}.
+
+True,
+  a tuple can hold any erlang term.
+
+----
 
 True or false: We can store tuples in variables
-	Foo = {this, is, a, tuple}.
+  Foo = {this, is, a, tuple}.
 
 True,
-	variables can hold any erlang term, which includes tuples.
+  variables can hold any erlang term, which includes tuples.
 
----
+----
 
 True or false: We can build tuples that hold variables
-	Foo = {this, is, a, tuple}.
-	Bar = {another, tuple, Foo}.
+  Foo = {this, is, a, tuple}.
+  Bar = {another, tuple, Foo}.
 
 True,
-	since a tuple can hold any erlang term, we can put variables into tuples as well. This example would expand to. {another, tuple, {this, is, a, tuple}}.
+  since a tuple can hold any erlang term, we can put variables into tuples as well. This example would expand to. {another, tuple, {this, is, a, tuple}}.
 
----
+----
 
 What is the value of Foo where
-	{john, likes, Foo} = {john, likes, erlang}.
+  {john, likes, Foo} = {john, likes, erlang}.
 
 erlang,
-	we can extract all or some of the values from a tuple using pattern matching. In this case john and likes are the same on both sides, however we have the variable Foo on the left hand side which matches to the atom erlang on the right hand side.  This will assign the atom erlang to the variable Foo.
+  we can extract all or some of the values from a tuple using pattern matching. In this case john and likes are the same on both sides, however we have the variable Foo on the left hand side which matches to the atom erlang on the right hand side.  This will assign the atom erlang to the variable Foo.
 
----
+----
 
 What is the value of Foo where 
-	{another, tuple, Foo} = {another, tuple, {this, is, a, tuple}}.
+  {another, tuple, Foo} = {another, tuple, {this, is, a, tuple}}.
 
 {this, is, a, tuple},
-	since the last term in the tuple on the right is another tuple, it will become bound to Foo if Foo is an unbound variable.
+  since the last term in the tuple on the right is another tuple, it will become bound to Foo if Foo is an unbound variable.
 
----
+----
 
 If Foo is bound to the tuple {this, is, a, tuple} what is the outcome of the following statement?
-	{Foo, tuple, {this, is, a, tuple}} = {another, tuple, {this, is, a, tuple}}.
+  {Foo, tuple, {this, is, a, tuple}} = {another, tuple, {this, is, a, tuple}}.
 
 Error!,
-	you will receive an error that looks something like this
-		** exception error: no match of right hand side value {another,tuple,
+  you will receive an error that looks something like this
+    ** exception error: no match of right hand side value {another,tuple,
                                                      	  {this,is,a,tuple}}
-	because the expression is trying to match the bound variable Foo, which is assigned the tuple {this, is, a, tuple},  with the atom another. If you tried to do this by itself it would look like
+  because the expression is trying to match the bound variable Foo, which is assigned the tuple {this, is, a, tuple},  with the atom another. If you tried to do this by itself it would look like
         {this, is, a, tuple} = another.
         which is obviously not a match.        
 
----
+----
 
 True or false: We can ignore some elements of a tuple while extracting others by using
-	{_, _, Foo} = {another, super, tuple}.
+  {_, _, Foo} = {another, super, tuple}.
 
 True,
-	by using the anonymous variable _ we can let the interpreter know that we don’t care about the first or second values of the tuple and that we only want the third term.  We will discuss anonymous variables a little later on.
+  by using the anonymous variable _ we can let the interpreter know that we don’t care about the first or second values of the tuple and that we only want the third term.  We will discuss anonymous variables a little later on.
 
----
+----
 
 Is it true that this is a list?
   [atom].
@@ -146,7 +144,7 @@ Is it true that this is a list?
 Yes, because [atom] is an atom enclosed by
 square brackets
 
----
+----
 
 Is it true that this is a list?
   [atom, turkey, org].
@@ -155,7 +153,7 @@ Yes, because it is a collection of atoms,
 separated by commas and enclosed by 
 square brackets.
 
----
+----
 
 Is it true that this is a list?
   [atom, turkey], org.
@@ -165,7 +163,7 @@ terms not enclosed by square
 brackets.  The first one is a list containing
 two atoms, and the second one is an atom.
 
----
+----
 
 Is it true that this is a list?
   [[atom, turkey], org].
@@ -173,29 +171,28 @@ Is it true that this is a list?
 Yes, because the two terms are now enclosed
 by square brackets.
 
----
+----
 
 Is it true that this is a term?
   xyz.
 
 Yes, because all atoms are terms.
 
----
+----
 
 Is it true that this is a term?
   [x,y,z].
 
 Yes, because it is a list.
 
----
+----
 
 Is it true that this is a term?
   [[x,y],z].
 
 Yes, because all lists are terms.
 
----
-
+----
 
 Is it true that this is a list?
   [erlang, is, great].
@@ -203,7 +200,7 @@ Is it true that this is a list?
 Yes, because it is a collection of terms
 enclosed by square brackets.
 
----
+----
 
 How many terms are in the list
   [erlang, is, great].
@@ -211,9 +208,7 @@ How many terms are in the list
 Three,
 each of the atoms in the list are a term
 
----
-
-
+----
 
 Is it true that this is a list?
   [[[how], are], [[you], [doing, so]], far].
@@ -221,7 +216,7 @@ Is it true that this is a list?
 Yes, because it is a collection of terms
 enclosed by square brackets.
 
----
+----
 
 How many terms are in the list
   [[[how], are], [[you], [doing, so]], far].
@@ -232,7 +227,7 @@ Three,
 [[you], [doing, so]]
 and far
 
----
+----
 
 Is it true that this is a list? 
   [].
@@ -240,14 +235,14 @@ Is it true that this is a list?
 Yes, square brackets by themselves create an
 empty list.
 
----
+----
 
 Is it true that this is an atom?
   [].
 
 No, because [] is just a list.
 
----
+----
 
 Is it true that this is a list?
   [[],[],[],[]].
@@ -255,297 +250,292 @@ Is it true that this is a list?
 Yes, because it is a collection of
 empty lists.
 
----
-
-
-
-
+----
 
 What is the value of Head where
-	[Head|_] = [a,b,c].
+  [Head|_] = [a,b,c].
 
 a, because a is the first atom of
 this list.
 
----
+----
 
 What is the value of Head where
-	[Head|_] = [[a,b,c], x,y,z].
+  [Head|_] = [[a,b,c], x,y,z].
 
 [a,b,c], because [a,b,c] is the first 
 term of this non-empty list.
 
----
+----
 
 What is the value of Head where 
-	[Head|_] = hotdog.
+  [Head|_] = hotdog.
 
 No answer, you cannot ask for the head of
 an atom.
 
----
+----
 
 What is the value of Head where
-	[Head|_] = [].
+  [Head|_] = [].
 
 No answer, You cannot ask for the head of 
 an empty list.
 
----
+----
 
 What is the value of Head where
-	[Head|_] = [[[hotdogs]], ['and'], [pickle], relish].
+  [Head|_] = [[[hotdogs]], ['and'], [pickle], relish].
 
 [[hotdogs]], read as: 
 "The list of the list of hotdogs"
 [[hotdogs]] is the first term of the list.
 
----
+----
 
 What is the value of Head where
-	[ [ Head | _ ] | _ ] = [[[hotdogs]], ['and']]. 
+  [ [ Head | _ ] | _ ] = [[[hotdogs]], ['and']]. 
  
 [hotdogs]
 
----
+----
 
 What is the value of Tail where
-	[_|Tail] = [a,b,c].
+  [_|Tail] = [a,b,c].
 
 [b,c], 
-	because [b,c] is the list without [Head|_].
+  because [b,c] is the list without [Head|_].
 
----
+----
 
 What is the value of Tail where
 [_|Tail] = [[a,b,c], x,y,z]. 
   
 [x,y,z]
 
----
+----
 
 What is the value of Tail where
 [_|Tail] = hotdogs.
 
 No answer,
-	You cannot ask for the Tail of an atom.
+  You cannot ask for the Tail of an atom.
 
----
+----
 
 What is the value of Tail where
-	[_|Tail] = [].
+  [_|Tail] = [].
 
 No answer,
-	You cannot ask for the Tail of an empty list.
+  You cannot ask for the Tail of an empty list.
 
----
+----
 
 What is the value of Head where
-	[ _ | [ Head | Tail ] ] = [[b], [x,y], [[c]]].
+  [ _ | [ Head | Tail ] ] = [[b], [x,y], [[c]]].
 
 [x,y],
-	because [[x,y], [[c]]] is the [_|Tail] of the list, and [x,y] is 
+  because [[x,y], [[c]]] is the [_|Tail] of the list, and [x,y] is 
 the [Head|_] of that Tail.
 
----
+----
 
 What is the value of Tail where
-	[_|[_|Tail]] = [[b], [x,y], [[c]]].
+  [_|[_|Tail]] = [[b], [x,y], [[c]]].
 
 [[[c]]],
-	because [[x,y], [[c]]] is the [_|Tail], and [[[c]]] is 
+  because [[x,y], [[c]]] is the [_|Tail], and [[[c]]] is 
 the [_|Tail] of that Tail.
 
----
+----
 
 What is the value of Tail where
-	[[_|Tail]|_] = [a, [b, [c]], d].
+  [[_|Tail]|_] = [a, [b, [c]], d].
 
 No answer,
-	since [_|Tail] is the Head of the list and the Head of [a, [b, [c]], d]
-	is an atom, and [_|Tail] does not take an atom as an argument.
+  since [_|Tail] is the Head of the list and the Head of [a, [b, [c]], d]
+  is an atom, and [_|Tail] does not take an atom as an argument.
 
----
-
+----
 
 What does [Head|_] match against?
 
 It will match against any non-empty list.
 
----
+----
 
 What does [_|Tail] match against?
 
 It will match against any non-empty list.
 
----
+----
 
 What is the value of _ where
-	[_|Tail] = [a,b,c].
+  [_|Tail] = [a,b,c].
 
 Nothing,
-	_ is an anonymous variable used in pattern matching when a variable is
-	required but it’s value can be ignored. It has been used in our examples of
-	[Head|_] and [_|Tail].  In these cases we have not cared about the value 
-	where _ is used so we chose to use an anonymous variable and ignore the
-	value.
+  _ is an anonymous variable used in pattern matching when a variable is
+  required but it’s value can be ignored. It has been used in our examples of
+  [Head|_] and [_|Tail].  In these cases we have not cared about the value 
+  where _ is used so we chose to use an anonymous variable and ignore the
+  value.
 
----
+----
 
 What is the resulting list when you add the atom peanut to the beginning of the list 	[butter, ‘and’, jelly]
 This can be written as
-	[peanut | [butter, ‘and’, jelly]].
+  [peanut | [butter, ‘and’, jelly]].
 
 [peanut, butter, ‘and’, jelly],
-	because adding peanut to the [Head|_] position will add it onto the existing list.
+  because adding peanut to the [Head|_] position will add it onto the existing list.
 
----
+----
 
 What is the resulting list when you add the atom jelly to the end of the list 
-	[peanut, butter, ‘and’]
+  [peanut, butter, ‘and’]
 This can be written as
-	[[peanut, butter, ‘and’] | jelly].
+  [[peanut, butter, ‘and’] | jelly].
 
 [[peanut, butter, ‘and’] | jelly],
-	because adding jelly to the [_|Tail] of the list will only create a new list with two 	terms, the old list and the atom jelly, it will not create a unified list as it does 
-	when you add something on to the [Head|_] of the list.
----
+  because adding jelly to the [_|Tail] of the list will only create a new list with two 	terms, the old list and the atom jelly, it will not create a unified list as it does 
+  when you add something on to the [Head|_] of the list.
+----
 
 How can we create a flat list using an atom and a list?
 
 [term | list],
-	because adding an atom to the [Head|_] of a list will create a new flat list. You can add any valid term to the head of the list, it is not restricted to atoms.
+  because adding an atom to the [Head|_] of a list will create a new flat list. You can add any valid term to the head of the list, it is not restricted to atoms.
 
----
+----
 
 How can we create a new list that contains a list and an atom?
 
 [list | atom],
-	because adding an atom to the [_|Tail] of a list will create a new list containing
-	a list and an atom.
+  because adding an atom to the [_|Tail] of a list will create a new list containing
+  a list and an atom.
 
----
+----
 
 Is is_atom(S) true or false where 
-	S = harry.
+  S = harry.
 
 True,
-	because is_atom(S) is just another way to ask “Is S an atom?”
+  because is_atom(S) is just another way to ask “Is S an atom?”
 
----
+----
 
 Is is_atom(S) true or false where 
-	S = [harry, had, a, heap, ‘of’, apples].
+  S = [harry, had, a, heap, ‘of’, apples].
 
 False,
-	since S is a list.
+  since S is a list.
 
----
+----
 
 How many arguments does is_atom() take and what are they?
 
 It takes one argument.  The argument can be any term.
 
----
+----
 
 Is is_atom(Head) true or false where
-	[Head|_] = [harry,  had, a, heap, ‘of’, apples].
+  [Head|_] = [harry,  had, a, heap, ‘of’, apples].
 
 True,
-	because the Head of the list would be the atom harry.
+  because the Head of the list would be the atom harry.
 
----
+----
 
 Is is_atom(Tail) true or false where
-	[_|Tail] = [harry,  had, a, heap, ‘of’, apples].
+  [_|Tail] = [harry,  had, a, heap, ‘of’, apples].
 
 False,
-	because the Tail of the list would be a list.
+  because the Tail of the list would be a list.
 
----
+----
 
 Is is_atom(Tail) true or false where
-	[_|Tail] = [harry].
+  [_|Tail] = [harry].
 
 False,
-	because the list [] is not an atom.
+  because the list [] is not an atom.
 
----
+----
 
 Is is_atom(Head) true or false where
-	[ _ | [ Head | _ ] ] = [swing, low, sweet, cherry, oat].
+  [ _ | [ Head | _ ] ] = [swing, low, sweet, cherry, oat].
 
 True,
-	because the Head of the [_|Tail] would be the atom low.
+  because the Head of the [_|Tail] would be the atom low.
 
----
+----
 
 Is is_atom(Head) true or false where
-	[ _ | [ Head | _ ] ] = [swing, [low, sweet], cherry, oat].
+  [ _ | [ Head | _ ] ] = [swing, [low, sweet], cherry, oat].
 
 False,
-	because the Head of [_|Tail] would be the list [low, sweet].
+  because the Head of [_|Tail] would be the list [low, sweet].
 
----
+----
 
 Is is_list(S) true or false where 
-	S = harry.
+  S = harry.
 
 False,
-	because is_list(S) is just another way to ask “Is S a list?”
+  because is_list(S) is just another way to ask “Is S a list?”
 
----
+----
 
 Is is_list(S) true or false where 
-	S = [harry, had, a, heap, ‘of’, apples].
+  S = [harry, had, a, heap, ‘of’, apples].
 
 True,
-	since S is a list.
+  since S is a list.
 
----
+----
 
 How many arguments does is_list() take and what are they?
 
 It takes one argument.  The argument can be any term.
 
----
+----
 
 Is is_list(Head) true or false where
-	[Head|_] = [harry,  had, a, heap, ‘of’, apples].
+  [Head|_] = [harry,  had, a, heap, ‘of’, apples].
 
 False,
-	because the Head of the list would be the atom harry.
+  because the Head of the list would be the atom harry.
 
----
-
-Is is_list(Tail) true or false where
-	[_|Tail] = [harry,  had, a, heap, ‘of’, apples].
-
-True,
-	because Tail would be the list [had, a, heap, ‘of’, apples].
-
----
+----
 
 Is is_list(Tail) true or false where
-	[_|Tail] = [harry].
+  [_|Tail] = [harry,  had, a, heap, ‘of’, apples].
 
 True,
-	because Tail would be [] which is an empty list.
+  because Tail would be the list [had, a, heap, ‘of’, apples].
 
----
+----
+
+Is is_list(Tail) true or false where
+  [_|Tail] = [harry].
+
+True,
+  because Tail would be [] which is an empty list.
+
+----
 
 Is is_list(Head) true or false where
-	[ _ | [ Head | _ ] ] = [swing, low, sweet, cherry, oat].
+  [ _ | [ Head | _ ] ] = [swing, low, sweet, cherry, oat].
 
 False,
-	because the Head of the [_|Tail] would be the atom low.
+  because the Head of the [_|Tail] would be the atom low.
 
----
+----
 
 Is is_list(Head) true or false where
-	[ _ | [ Head | _ ] ] = [swing, [low, sweet], cherry, oat].
+  [ _ | [ Head | _ ] ] = [swing, [low, sweet], cherry, oat].
 
 True,
-	because the Head of [_|Tail] would be the list [low, sweet].
+  because the Head of [_|Tail] would be the list [low, sweet].
 
----
+----
