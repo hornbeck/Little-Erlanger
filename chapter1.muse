@@ -2,34 +2,42 @@
 
 
 Is it true that this is an atom?
+<example>
   dog.
+</example>
 
-Yes, because dog is a string of characters
-beginning with the letter d.
+Yes, 
+  because dog is a string of characters beginning with the letter d.
 
 ----
 
 Is it true that this is an atom?
+<example>
   john.
+</example>
 
-Yes, because john is a string of characters
-beginning with a letter.
+Yes, 
+  because john is a string of characters beginning with a letter.
 
 ----
 
 Is it true that this is an atom?
+<example>
   h.
+</example>
 
-Yes, because h is a string of one character,
-which is a letter.
+Yes, 
+  because h is a string of one character, which is a letter.
 
 ----
 
 Is it true that this is an atom?
+<example>
   '*abc$'.
+</example>
 
-Yes, because surrounding any character string
-with single quotes makes it an atom.
+Yes, 
+  because surrounding any character string with single quotes makes it an atom.
 
 ----
 
@@ -60,7 +68,7 @@ False,
   variables can only be assigned once.  This is called single assignment. Once Foo is bound to the atom john it cannot be rebound to another value*.
 
 
-[1]In some cases I will reuse a variable in separate examples which would require rebinding it.  If you are following along at the REPL and you have a variable called Head you can make the variable unbound by using the command f(Head).  This should only be used for testing purposes at the REPL and should never be used in an attempt to override single assignment variables.
+[1] In some cases I will reuse a variable in separate examples which would require rebinding it.  If you are following along at the REPL and you have a variable called Head you can make the variable unbound by using the command f(Head).  This should only be used for testing purposes at the REPL and should never be used in an attempt to override single assignment variables.
 
 ----
 
@@ -165,8 +173,8 @@ Is it true that this is a list?
   [atom].
 </example>
 
-Yes, because [atom] is an atom enclosed by
-square brackets
+Yes, 
+  because [atom] is an atom enclosed by square brackets
 
 ----
 
@@ -175,9 +183,8 @@ Is it true that this is a list?
   [atom, turkey, org].
 </example>
 
-Yes, because it is a collection of atoms,
-separated by commas and enclosed by 
-square brackets.
+Yes, 
+  because it is a collection of atoms, separated by commas and enclosed by square brackets.
 
 ----
 
@@ -186,10 +193,9 @@ Is it true that this is a list?
   [atom, turkey], org.
 </example>
 
-No, because these are two separate 
-terms not enclosed by square 
-brackets.  The first one is a list containing
-two atoms, and the second one is an atom.
+No, 
+  because these are two separate terms not enclosed by square brackets.  The first one is a list containing
+  two atoms, and the second one is an atom.
 
 ----
 
@@ -198,8 +204,8 @@ Is it true that this is a list?
   [[atom, turkey], org].
 </example>
 
-Yes, because the two terms are now enclosed
-by square brackets.
+Yes, 
+  because the two terms are now enclosed by square brackets.
 
 ----
 
@@ -208,7 +214,8 @@ Is it true that this is a term?
   xyz.
 </example>
 
-Yes, because all atoms are terms.
+Yes, 
+  because all atoms are terms.
 
 ----
 
@@ -217,7 +224,8 @@ Is it true that this is a term?
   [x,y,z].
 </example>
 
-Yes, because it is a list.
+Yes, 
+  because it is a list.
 
 ----
 
@@ -226,7 +234,8 @@ Is it true that this is a term?
   [[x,y],z].
 </example>
 
-Yes, because all lists are terms.
+Yes, 
+  because all lists are terms.
 
 ----
 
@@ -267,9 +276,9 @@ How many terms are in the list
 and what are they?
 
 Three,
-[[how], are]
-[[you], [doing, so]]
-and far
+  [[how], are]
+  [[you], [doing, so]]
+  and far
 
 ----
 
@@ -401,29 +410,33 @@ No answer,
 
 ----
 
-What is the value of Head where
+What is the value of Second where
 <example>
-  [ _ | [ Head | Tail ] ] = [[b], [x,y], [ [c] ]].
+  [_, Second | Tail] = [[b], [x,y], [ [c] ]].
 </example>
 
 [x,y],
-  because [[x,y], [ [c] ]] is the [_ |Tail] of the list, and [x,y] is the [Head|_] of that Tail.
+  because we can access the second term in the list by using an anonymous variable for the head term, then include
+  a comma, followed by the variable Second which will match the second element in the list.  If you know how long a 
+  list is, you can access any element this way by separating each term with a comma until you have all of the terms 
+  off of the head that you are needing.
 
 ----
 
 What is the value of Tail where
 <example>
-  [_ |[_ |Tail]] = [[b], [x,y], [ [c] ]].
+  [_ , _ | Tail] = [[b], [x,y], [ [c] ]].
 </example>
 
 [[ [c] ]],
-  because [[x,y], [ [c] ]] is the [_ |Tail], and [ [ [c] ] ] is the [_|Tail] of that Tail.
+  because we are able to take the first two terms off of the head of the list leaving only the last element remaining
+  in the list.
 
 ----
 
 What is the value of Tail where
 <example>
-  [[ _ |Tail]|_] = [a, [b, [c]], d].
+  [[_ |Tail]|_ ] = [a, [b, [c]], d].
 </example>
 
 No answer,
@@ -438,7 +451,7 @@ It will match against any non-empty list.
 
 ----
 
-What does [_|Tail] match against?
+What does [_ |Tail] match against?
 
 It will match against any non-empty list.
 
@@ -446,13 +459,13 @@ It will match against any non-empty list.
 
 What is the value of _ where
 <example>
-  [_|Tail] = [a,b,c].
+  [_ |Tail] = [a,b,c].
 </example>
 
 Nothing,
   _ is an anonymous variable used in pattern matching when a variable is
   required but it’s value can be ignored. It has been used in our examples of
-  [Head|_] and [_|Tail].  In these cases we have not cared about the value 
+  [Head|_] and [_ |Tail].  In these cases we have not cared about the value 
   where _ is used so we chose to use an anonymous variable and ignore the
   value.
 
@@ -460,7 +473,9 @@ Nothing,
 
 What is the resulting list when you add the atom peanut to the beginning of the list 	[butter, ‘and’, jelly]
 This can be written as
+<example>
   [peanut | [butter, ‘and’, jelly]].
+</example>
 
 [peanut, butter, ‘and’, jelly],
   because adding peanut to the [Head|_] position will add it onto the existing list.
@@ -468,25 +483,35 @@ This can be written as
 ----
 
 What is the resulting list when you add the atom jelly to the end of the list 
+<example>
   [peanut, butter, ‘and’]
+</example>
 This can be written as
+<example>
   [[peanut, butter, ‘and’] | jelly].
+</example>
 
-[[peanut, butter, ‘and’] | jelly],
+<code>
+[[peanut, butter, ‘and’] | jelly]
+</code>,
   because adding jelly to the [_ |Tail] of the list will only create a new list with two terms, the old list and the atom jelly, it will not create a unified list as it does 
   when you add something on to the [Head|_] of the list.
 ----
 
 How can we create a flat list using an atom and a list?
 
-[term | list],
+<code>
+[term | list]
+</code>,
   because adding an atom to the [Head|_] of a list will create a new flat list. You can add any valid term to the head of the list, it is not restricted to atoms.
 
 ----
 
 How can we create a new list that contains a list and an atom?
 
-[list | atom],
+<code>
+[list | atom]
+</code>,
   because adding an atom to the [_|Tail] of a list will create a new list containing
   a list and an atom.
 
@@ -501,7 +526,9 @@ True,
 ----
 
 Is is_atom(S) true or false where 
+<example>
   S = [harry, had, a, heap, ‘of’, apples].
+</example>
 
 False,
   since S is a list.
@@ -515,7 +542,9 @@ It takes one argument.  The argument can be any term.
 ----
 
 Is is_atom(Head) true or false where
+<example>
   [Head|_] = [harry,  had, a, heap, ‘of’, apples].
+</example>
 
 True,
   because the Head of the list would be the atom harry.
@@ -523,7 +552,9 @@ True,
 ----
 
 Is is_atom(Tail) true or false where
-  [_|Tail] = [harry,  had, a, heap, ‘of’, apples].
+<example>
+  [_ |Tail] = [harry,  had, a, heap, ‘of’, apples].
+</example>
 
 False,
   because the Tail of the list would be a list.
@@ -531,7 +562,9 @@ False,
 ----
 
 Is is_atom(Tail) true or false where
-  [_|Tail] = [harry].
+<example>
+  [_ |Tail] = [harry].
+</example>
 
 False,
   because the list [] is not an atom.
@@ -539,7 +572,9 @@ False,
 ----
 
 Is is_atom(Head) true or false where
+<example>
   [ _ | [ Head | _ ] ] = [swing, low, sweet, cherry, oat].
+</example>
 
 True,
   because the Head of the [_|Tail] would be the atom low.
@@ -547,15 +582,19 @@ True,
 ----
 
 Is is_atom(Head) true or false where
+<example>
   [ _ | [ Head | _ ] ] = [swing, [low, sweet], cherry, oat].
+</example>
 
 False,
-  because the Head of [_|Tail] would be the list [low, sweet].
+  because the Head of [_ |Tail] would be the list [low, sweet].
 
 ----
 
 Is is_list(S) true or false where 
+<example>
   S = harry.
+</example>
 
 False,
   because is_list(S) is just another way to ask “Is S a list?”
@@ -563,7 +602,9 @@ False,
 ----
 
 Is is_list(S) true or false where 
+<example>
   S = [harry, had, a, heap, ‘of’, apples].
+</example>
 
 True,
   since S is a list.
@@ -577,7 +618,9 @@ It takes one argument.  The argument can be any term.
 ----
 
 Is is_list(Head) true or false where
+<example>
   [Head|_] = [harry,  had, a, heap, ‘of’, apples].
+</example>
 
 False,
   because the Head of the list would be the atom harry.
@@ -585,7 +628,9 @@ False,
 ----
 
 Is is_list(Tail) true or false where
+<example>
   [_|Tail] = [harry,  had, a, heap, ‘of’, apples].
+</example>
 
 True,
   because Tail would be the list [had, a, heap, ‘of’, apples].
@@ -593,7 +638,9 @@ True,
 ----
 
 Is is_list(Tail) true or false where
-  [_|Tail] = [harry].
+<example>
+  [_ |Tail] = [harry].
+</example>
 
 True,
   because Tail would be [] which is an empty list.
@@ -601,15 +648,19 @@ True,
 ----
 
 Is is_list(Head) true or false where
-  [ _ | [ Head | _ ] ] = [swing, low, sweet, cherry, oat].
+<example>
+  [ _ | [ Head | _ ] ] = [these, arms, of, mine].
+</example>
 
 False,
-  because the Head of the [_|Tail] would be the atom low.
+  because the Head of the [_|Tail] would be the atom arms.
 
 ----
 
 Is is_list(Head) true or false where
+<example>
   [ _ | [ Head | _ ] ] = [swing, [low, sweet], cherry, oat].
+</example>
 
 True,
   because the Head of [_|Tail] would be the list [low, sweet].
