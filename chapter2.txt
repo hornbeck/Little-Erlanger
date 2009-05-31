@@ -10,9 +10,7 @@ True,
 ----
 
 Is it true that a file named little_erlanger.erl would have the module definition 
-<example>
   -module(little_erlanger).
-</example>
 
 True,
   The module name must match the file name.
@@ -34,9 +32,7 @@ True,
 ----
 
 Will the following definition export a function?
-<example>
   -export([double/1]).
-</example>
 
 True,
   the -export() function is how you will make a list of functions that are  publicly available outside of the module.
@@ -44,19 +40,17 @@ True,
 ----
 
 What is the function being exported?
-<example>
   -export([double/1]).
-</example>
 
 double/1,
   The name of the function being exported is double and the /1 means that it takes 1 argument.  This is called the arity of the function and is very important because you can name multiple functions double but give them all a different arity. We will discuss what the arity is a little later on.
 
 ----
 
-True or false: <code>-export()</code> takes a list as an argument
+True or false: -export() takes a list as an argument
 
 True,
-  <code>-export()</code> takes a list containing the functions that you would like to make public.
+  -export() takes a list containing the functions that you would like to make public.
 
 ----
 
@@ -74,13 +68,11 @@ You were not expected to be able to answer that yet.  Let's look at how to do th
 
 ----
 
-<example>
 -module(little_erlanger).
 -export([double/1]).
 
 double(X) ->
   X * 2.
-</example>
 
 What would the file name be for this module?
 
@@ -103,10 +95,8 @@ What is the arity of double/1
 ----
 
 What is the head of the function
-<example>
   double(X) ->
     X * 2.
-</example>
 
 double(X),
   the head of the function is the function name and a clause used for pattern matching. In the case of double(X) the clause is X which is a variable that could match against any single argument passed to the function.  We will see how these clauses are more effectively used later on.
@@ -114,10 +104,8 @@ double(X),
 ----
 
 What is the body of 
-<example>
   double(X) ->
     X * 2.
-</example>
 
 X * 2,
   The body of the function is the code that follows the ->
@@ -161,9 +149,7 @@ True,
 ----
 
 True or false: our new -export() definition will look like this
-<example>
   -export([double/1, add/2]).
-</example>
 
 True,
   our -export() definition now holds a list of two function names with their arity.
@@ -171,10 +157,8 @@ True,
 ----
 
 This is the function add/2
-<example>
   add(X, Y) ->
     X + Y.
-</example>
 
 ----
 
@@ -212,9 +196,7 @@ True,
 ----
 
 What is the variable Foo bound to in the following statement?
-<example>
   Foo = fun(X, Y) -> X + Y end.
-</example>
 
 Foo is bound to an anonymous function that takes two arguments and adds them together.
 
@@ -236,11 +218,9 @@ True,
 ----
 
 This is the anonymous function that acts as both* add/2 and double/1
-<example>
   MultiMath = fun({double, X}) -> {double, X * 2};
                  ({add, X, Y}) -> {add, X + Y}
               end.
-</example>
 
 it’s not best practice to do this with anonymous functions, this is simply to demonstrate how powerful they can be.
 
@@ -317,12 +297,10 @@ Can we write a non-anonymous function in our module that behaves like the MultiM
 
 Yes,
   it would look like this.
-<example>
 multimath({add, X, Y}) ->
 	{add, X + Y};
 multimath({double, X}) ->
 	{double, X * 2}.
-</example>
 
 ----
 
@@ -334,9 +312,8 @@ False,
 ----
 
 What will our -export() definition look like now?
-<example>
   -export([double/1, add/2, multimath/1]).
-</example>
+
 ----
 
 Why does multimath have an arity of 1?
@@ -347,7 +324,6 @@ Because it only takes 1 argument, a tuple
 
 The entire module now looks like this
 
-<example>
 -module(little_erlanger).
 -export([double/1, add/2, multimath/1]).
 
@@ -361,7 +337,6 @@ multimath({add, X, Y}) ->
   {add, X + Y};
 multimath({double, X}) ->
   {double, X * 2}.
-</example>
 
 ----
 
