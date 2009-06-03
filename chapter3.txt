@@ -1,4 +1,4 @@
-#title Chapter 3
+Chapter 3
 
 What does the following function do?
      add(X, Y) when is_integer(X), is_integer(Y) -> X + Y.
@@ -9,14 +9,86 @@ add/2 will only add together X and Y if they are both integers.
 
 How does *add/2* know if X and Y are integers?
 
-add/2 uses two guards to perform checks on the variables. A guard is a way to test a variable being passed to a function.  In the case of add/2, the guard being used is the BIF(built in function) is_integer which will return true if the variable is an integer and false if it is not. We can add guards to function definitions by using the key word "when" followed by the guard or guard sequence that we would like to perform.
+add/2 uses two guard expressions to perform checks on the variables. A guard is a way to test an argument being passed to a function.  In the case of add/2, the guard being used is the BIF(built in function) is_integer which will return true if the variable is an integer and false if it is not. We can add guards to function definitions by using the key word "when" followed by the guard or guard sequence that we would like to perform.
 
 ----
 
-Does add/2 use a guard or guard sequence?
+True or false: add/2 uses a guard
 
-add/2 uses a guard sequence since it uses two tests.  You separate these tests with commas.
+True,
+  add/2 uses a guard which is a series of guard expressions that must all evaluate true for the guard to succeed.
+
+----
+
+True or false: add/2 uses a guard sequence
+
+False,
+  a guard sequence is single guard or series of guard expressions separated with semicolons. A guard sequence will succeed if at least one guard expression is true.
+
+----
+
+True or false: Guards can only be used to test arguments to functions?
+
+False,
+  a guard can be used anywhere that an expression is allowed. 
+
+----
+
+Can we use a guard in an if statement?
+
+Yes,
+  we can use a guard anywhere that an expression is allowed.
+
+----
+
+Answer the following questions using this if statement.
+
+  if
+    is_list(Foo) ->
+      io:format("Foo is a list~n");
+    is_atom(Foo) ->
+      io:format("Foo is an atom~n");
+    true ->
+      io:format("I don't know what Foo is~n")
+  end.
+
+----
+
+What is the first question asked in the if statement?
+
+The first question asked is is_list(Foo). is_list will return true if Foo is a list and false if Foo is not a list. If it is a list then io:format will print out
+"Foo is a list"
+
+----
+
+What is the second question asked in the if statement?
+
+The second question is the guard is_atom(Foo). is_atom is just like is_list except that it checks to see if Foo is an atom or not and will print out "Foo is an atom" if the guard returns true.
+
+----
+
+What is the third and final question asked by the if statement?
+
+true,
+  while it's not really a question, the final guard is simply the atom true which will make sure that the if statement evaluates and returns something even if all guards return false. true is used as a catch all and should always be the last guard used.
+
+----
+
+What is the value returned from the if statement when Foo is equal to
+ [happy, happy, joy, joy].
+
+"Foo is a list",
+  because Foo would hold a list as it's value.
+
+----
+
+What is the value returned from the if statement when Foo is equal to
+  5.
+
+"I don't know what Foo is",
+  Foo is not an atom or a list so the last guard, true, is the catch all and will return it's value.
 
 ----
 
 
+  
