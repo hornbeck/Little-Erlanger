@@ -1,6 +1,6 @@
 Chapter 3
 
-What does the following function do?
+What does the following function definition do?
      add(X, Y) when is_integer(X), is_integer(Y) -> X + Y.
 
 add/2 will only add together X and Y if they are both integers.
@@ -90,5 +90,69 @@ What is the value returned from the if statement when Foo is equal to
 
 ----
 
+What happens if we don't have any guards return true in the if statement?
 
-  
+An exception will be thrown
+
+----
+
+What is an exception?
+
+An exception being raised is a way for your application to tell you when something has gone wrong. 
+
+----
+
+Would an exception be raised if we passed an atom as an argument to our add/2 function?
+
+Yes,
+  an exception would be raised that looks something like this
+
+  ** exception error: no function clause matching 
+                    little_erlanger:add(3,four)
+
+----
+
+True or false: This exception is telling us that it could not find a function definition that matched our arguments?
+
+True,
+  The exception raised is the "no function clause matching little_erlanger:add(3,four)."
+
+----
+
+Can we rewrite the add/2 function to work with these arguments?
+
+Yes,
+  let's start by making add/2 do simple addition on numbers 0-9 and the second number can be spelled out instead of an integer
+
+----
+
+Our new add/2, now with words
+
+add_with_words(First, Second) ->
+  case Second of
+    zero -> First + 0;
+    one  -> First + 1;
+    two  -> First + 2;
+    three -> First + 3;
+    four -> First + 4;
+    five -> First + 5;
+    six  -> First + 6;
+    seven -> First + 7;
+    eight -> First + 8;
+    nine -> First + 9;
+    Second when is_number(Second) -> First + Second
+  end.
+
+Will our function raise an exception if we use the arguments (3, four) now?
+
+No,
+  our function can handle zero-nine spelled out if they are the second argument and any real numbers as the first or second argument.
+
+----
+
+What new conditional statement did we use to accomplish writing this function?
+
+A case statement
+
+----
+
