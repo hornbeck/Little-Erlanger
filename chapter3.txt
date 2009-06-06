@@ -11,6 +11,8 @@ How does *add/2* know if X and Y are integers?
 
 add/2 uses two guard expressions to perform checks on the variables. A guard is a way to test an argument being passed to a function.  In the case of add/2, the guard being used is the BIF(built in function) is_integer which will return true if the variable is an integer and false if it is not. We can add guards to function definitions by using the key word "when" followed by the guard or guard sequence that we would like to perform.
 
+%% Perhaps break the "A guard is..." part out into it's own little box and leave the answer concise.
+
 ----
 
 True or false: add/2 uses a guard
@@ -59,11 +61,15 @@ What is the first question asked in the if statement?
 The first question asked is is_list(Foo). is_list will return true if Foo is a list and false if Foo is not a list. If it is a list then io:format will print out
 "Foo is a list"
 
+%% Might break into two parts question / answers.  "What is the first question asked in the if statement?", and "What will it do if Foo is a list?"
+
 ----
 
 What is the second question asked in the if statement?
 
 The second question is the guard is_atom(Foo). is_atom is just like is_list except that it checks to see if Foo is an atom or not and will print out "Foo is an atom" if the guard returns true.
+
+%% Again, while repetitive, I think it is worth it to itemize each of these separately: "What is question?", "What will it do if..."
 
 ----
 
@@ -91,6 +97,8 @@ What is the value returned from the if statement when Foo is equal to
 ----
 
 What happens if we don't have any guards return true in the if statement?
+
+%% Should this be: "What would happen if we don't have any guards return true in an if statement", otherwise it could sound like we are still talking about the same if statement being used previously.
 
 An exception will be thrown
 
