@@ -5,13 +5,23 @@ What does the following function definition do?
 
 add/2 will only add together X and Y if they are both integers.
 
+%% I'd word it:
+%% add/2 will add X and Y and return their sum, but only if they are both integers.
+%% to me the, "but only if" is kind of like the English equivalent of the guard
 ----
 
 How does *add/2* know if X and Y are integers?
 
 add/2 uses two guard expressions to perform checks on the variables. A guard is a way to test an argument being passed to a function.  In the case of add/2, the guard being used is the BIF(built in function) is_integer which will return true if the variable is an integer and false if it is not. We can add guards to function definitions by using the key word "when" followed by the guard or guard sequence that we would like to perform.
 
-%% Perhaps break the "A guard is..." part out into it's own little box and leave the answer concise.
+%% Thoughts: Perhaps break the "A guard is..." part out into it's own little box and leave the answer concise.  Also, thinking that is_integer should already be covered (maybe it was and I forgot?).  Let the reader focus on the guard function, without a detour into what a BIF is and is_integer does.  This could be covered back where you do is_atom(X).
+%%
+%% Example rewording:
+%% add/2 uses a guard.  The guard uses the BIF is_integer to check that both X and Y are integers.  We can add guards to function definitions by using the key word "when" followed by a guard or guard sequence.
+%%
+%% Vocabulary: Guard. A guard is a way to test arguments.  A guard can be made up of one or more guard expressions.  A guard is only true if all of it's guard expressions are true.
+
+
 
 ----
 
@@ -20,12 +30,30 @@ True or false: add/2 uses a guard
 True,
   add/2 uses a guard which is a series of guard expressions that must all evaluate true for the guard to succeed.
 
+%% Reword: add/2 uses a guard composed of two guard expressions separated by a comma.  The first guard expression  (is_integer(X)) checks that the variable X is an integer. The second guard expression (is_integer(Y)) does the same for variable Y.
+
 ----
 
 True or false: add/2 uses a guard sequence
 
 False,
   a guard sequence is single guard or series of guard expressions separated with semicolons. A guard sequence will succeed if at least one guard expression is true.
+
+%% a guard sequence is series of guards, not guard expressions, and there must be at least two to be a sequence... if I understand right
+%% Reword: a guard sequence is two or more guards separated by semicolons.  A guard sequence will succeed if at least one guard is true.
+
+%% Example: function with a guard with 2 guard expressions: when both are true
+
+%% Example: function with a guard with 2 guard expressions: when both are false
+
+%% Example: function with a guard with 2 guard expressions: when one is false
+
+%% Example: function with a sequence of 2 guards: when both are true
+%%          sub-question: does 2nd guard in sequence even get evaluated?
+
+%% Example: function with a sequence of 2 guards: when both are false
+
+%% Example: function with a sequence of 2 guards: when first is false, 2nd true
 
 ----
 
@@ -56,6 +84,9 @@ Answer the following questions using this if statement.
 
 ----
 
+%% Does this if statement contain a single guard composed of three guard expressions, or is it a guard sequence composed of three individual guards?  Answer...
+
+
 What is the first question asked in the if statement?
 
 The first question asked is is_list(Foo). is_list will return true if Foo is a list and false if Foo is not a list. If it is a list then io:format will print out
@@ -69,14 +100,17 @@ What is the second question asked in the if statement?
 
 The second question is the guard is_atom(Foo). is_atom is just like is_list except that it checks to see if Foo is an atom or not and will print out "Foo is an atom" if the guard returns true.
 
-%% Again, while repetitive, I think it is worth it to itemize each of these separately: "What is question?", "What will it do if..."
+%% Again, while repetitive, I think it is worth it to itemize each of these separately: "What is question?", "What will it do if..." just to highlight that guard affects what gets executed
 
 ----
+
+%% Why is it important that it is a guard sequence, and not a single guard?  If it was a single guard no way it could ever be true as is_list and is_atom can't both be true for any single value Foo.  And all guard expressions must be true for a guard to be true.  Wording can probably be improved.
+
 
 What is the third and final question asked by the if statement?
 
 true,
-  while it's not really a question, the final guard is simply the atom true which will make sure that the if statement evaluates and returns something even if all guards return false. true is used as a catch all and should always be the last guard used.
+  while it's not really a question, the final guard is simply the atom true which will make sure that the if statement evaluates and returns something even if all guards return false. true is used as a catch all and should always be the last guard used %% in a guard sequence.
 
 ----
 
@@ -98,7 +132,7 @@ What is the value returned from the if statement when Foo is equal to
 
 What happens if we don't have any guards return true in the if statement?
 
-%% Should this be: "What would happen if we don't have any guards return true in an if statement", otherwise it could sound like we are still talking about the same if statement being used previously.
+%% Should this be: "What would happen if we don't have any guards return true in an if statement", otherwise it could sound like we are still talking about the same if statement being used previously which has the default true guard to catch all.
 
 An exception will be thrown
 
@@ -127,6 +161,10 @@ True,
 
 ----
 
+%% Why couldn't it find a function definition that matched our arguments?  Guards check for is_integer, four is not an integer.
+
+%% What is four?  It's an atom.
+
 Can we rewrite the add/2 function to work with these arguments?
 
 Yes,
@@ -151,6 +189,7 @@ add_with_words(First, Second) ->
     Second when is_number(Second) -> First + Second
   end.
 
+
 Will our function raise an exception if we use the arguments (3, four) now?
 
 No,
@@ -164,3 +203,10 @@ A case statement
 
 ----
 
+%% How many guards are used in the case statement?  One.  The only guard is when is_number(Second).  zero - nine and Second are pattern matches.
+
+%% Does the case statement use a guard sequence?  No, it uses a single guard which has one guard expression.
+
+%% Questions I'd have:
+%%
+%% If and when seem very similar.  What are differences?  When should you use one over the other?
