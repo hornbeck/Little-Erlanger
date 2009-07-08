@@ -1,9 +1,14 @@
 Might be worth defining:
 
-Intended Audience:
+Intended Audience: Professional developers looking to learn Erlang but not wanting a heavy book.
 
 Book Goals: What do we want people to come away with from this book?  What about this book would make
 people recommend it to others?  I think we have a good start in it's unique Q&A format.
+
+I think the main goal for me is to bring the format of the little schemer to erlang. The little
+schemer was very easy to read and fun. Not only that but it was short. A 200 page book can be
+read over a weekend and with the little schemer you could work the examples as you went. It was 
+also a very lite reading.
 
 * Chapter 1
 ** Atoms
