@@ -45,7 +45,7 @@ Is it true that Foo is bound to the atom john in
   Foo = john.
 
 True,
-  Foo is bound to the atom john by using the = operator.
+  The variable Foo is bound to the atom john by using the = operator.
 
 ----
 
@@ -80,7 +80,7 @@ Is it true that this is a tuple?
   {john, {really, likes}, erlang}.
 
 True,
-  a tuple can hold any erlang term.
+  a tuple can hold any Erlang term.
 
 ----
 
@@ -88,7 +88,7 @@ True or false: We can store tuples in variables
   Foo = {this, is, a, tuple}.
 
 True,
-  variables can hold any erlang term, which includes tuples.
+  variables can hold any Erlang term, which includes tuples.
 
 ----
 
@@ -97,7 +97,7 @@ True or false: We can build tuples that hold variables
   Bar = {another, tuple, Foo}.
 
 True,
-  since a tuple can hold any erlang term, we can put variables into tuples as well. This example would expand to. {another, tuple, {this, is, a, tuple}}.
+  since a tuple can hold any Erlang term, we can put variables into tuples as well. This example would expand to. {another, tuple, {this, is, a, tuple}}.
 
 ----
 
@@ -105,7 +105,7 @@ What is the value of Foo where
   {john, likes, Foo} = {john, likes, erlang}.
 
 erlang,
-  we can extract all or some of the values from a tuple using pattern matching. In this case john and likes are the same on both sides, however we have the variable Foo on the left hand side which matches to the atom erlang on the right hand side.  This will assign the atom erlang to the variable Foo.
+  we can extract all or some of the values from a tuple using pattern matching. In this case the atoms john and likes are the same on both sides, so they match. We also have the unbound variable Foo on the left hand side which matches to the atom erlang on the right hand side.  This will assign the atom erlang to the variable Foo.
 
 ----
 
@@ -126,7 +126,7 @@ Error!,
                                                      	  {this,is,a,tuple}}
   because the expression is trying to match the bound variable Foo, which is assigned the tuple {this, is, a, tuple},  with the atom another. If you tried to do this by itself it would look like
         {this, is, a, tuple} = another.
-        which is obviously not a match.        
+        which is obviously not a match.
 
 ----
 
@@ -167,7 +167,7 @@ Is it true that this is a list?
   [[atom, turkey], org].
 
 Yes, 
-  because the two terms are now enclosed by square brackets.
+  because the two terms are now enclosed by square brackets and separated by a comma.
 
 ----
 
@@ -254,7 +254,7 @@ Yes,
 
 ----
 
-What is the value of Head where
+What is the value of the variable Head where
   [Head|_] = [a,b,c].
 
 a, 
@@ -390,24 +390,23 @@ Nothing,
   value.
 
 ----
-%% TODO: change the examples below to use an atom that does not require single quotes.
 
-What is the resulting list when you add the atom peanut to the beginning of the list 	[butter, ‘and’, jelly]
+What is the resulting list when you add the atom peanut to the beginning of the list 	[butter, bacon, jelly]
 This can be written as
-  [peanut | [butter, ‘and’, jelly]].
+  [peanut | [butter, bacon, jelly]].
 
-[peanut, butter, ‘and’, jelly],
+[peanut, butter, bacon, jelly],
   because adding peanut to the [Head|_] position will add it onto the existing list.
 
 ----
 
 What is the resulting list when you add the atom jelly to the end of the list 
-  [peanut, butter, ‘and’]
+  [peanut, butter, bacon]
 This can be written as
-  [[peanut, butter, ‘and’] | jelly].
+  [[peanut, butter, bacon] | jelly].
 
 
-[[peanut, butter, ‘and’] | jelly],
+[[peanut, butter, bacon] | jelly],
   because adding jelly to the [_ |Tail] of the list will only create a new list with two terms, the old list and the atom jelly, it will not create a unified list as it does 
   when you add something on to the [Head|_] of the list.
 ----
@@ -432,6 +431,23 @@ Is is_atom(S) true or false where
 
 True,
   because is_atom(S) is just another way to ask “Is S an atom?”
+
+----
+
+Is is_atom(S) true or false where
+  S = of.
+
+Syntax Error,
+  because of is one of the 28 reserved words in Erlang.  The full list of reserved words is:
+  after and andalso band begin bnot bor bsl bsr bxor case catch cond div end fun if let not of or orelse query receive rem try when xor
+
+----
+
+Is is_atom(S) true or false where
+  S = 'of'
+
+True,
+  a string of characters enclosed by single quotes is an atom and will not cause a syntax error when used with reserved words.
 
 ----
 
@@ -485,7 +501,7 @@ Is is_atom(Second) true or false where
   [_, Second | _ ] = [swing, [low, sweet], cherry, oat].
 
 False,
-  the second term in the list is another list.
+  the second term in the list is the list [low, sweet].
 
 ----
 
@@ -548,5 +564,12 @@ Is is_list(Head) true or false where
 
 True,
   because the Head of [_|Tail] would be the list [low, sweet].
+
+----
+
+Is it true or false that is_atom() and is_list() are BIFs?
+
+True,
+  BIF stands for Built-In Function.
 
 ----
