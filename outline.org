@@ -1,3 +1,10 @@
+Might be worth defining:
+
+Intended Audience:
+
+Book Goals: What do we want people to come away with from this book?  What about this book would make
+people recommend it to others?  I think we have a good start in it's unique Q&A format.
+
 * Chapter 1
 ** Atoms
 *** atom
@@ -10,7 +17,7 @@
 * Chapter 2
 ** modules
 ** functions
-** anonymous functions 
+** anonymous functions
 ** arity
 * Chapter 3
 ** guards
