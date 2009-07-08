@@ -142,15 +142,6 @@ A third and final question is asked
 
 ----
 
-%% What do you mean by the following question? Are you calling the if statement a guard sequence? - john
-
-%% Why is it important that it is a guard sequence, and not a single guard?  If it was a single guard no way it could ever be true as is_list and is_atom can't both be true for any single value Foo.  And all guard expressions must be true for a guard to be true.  Wording can probably be improved.
-
-%% I think I was just tired and trying to think up stuff to add. :)
-
-
-----
-
 What is the third and final question asked by the if statement?
 
 true,

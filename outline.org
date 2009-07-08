@@ -14,17 +14,22 @@
 ** arity
 * Chapter 3
 ** guards
-** records
-** case
 ** if
-** list comprehensions
-* Chapter 4
 ** exceptions
+** case
+* Chapter 4
 ** try
 ** catch
+** records
+** list comprehensions
 * Chapter 5
 ** receive
 ** bang
 ** spawn
 ** pid
+* Chapter 6
+** ets
+** dets
+** dict
+** mnesia
 
