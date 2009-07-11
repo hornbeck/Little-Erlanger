@@ -43,7 +43,7 @@ What is the function being exported?
   -export([double/1]).
 
 double/1,
-  The name of the function being exported is double and the /1 means that it takes 1 argument.  This is called the arity of the function and is very important because you can name multiple functions double but give them all a different arity. We will discuss what the arity is a little later on.
+  The name of the function being exported is double and the /1 means that it takes 1 argument.  This is called the arity of the function and is very important because you can name multiple functions double but give them all a different arity. We will discuss more about arity a little later on.
 
 ----
 
@@ -58,7 +58,7 @@ True or false:
   6 = double(3).
 
 True,
-  double(3) is a function that will multiply the argument by 2. You may also notice that it looks like we are assigning the value of double(3) to the number 6, while it appears this way that is a wrong assumption.  The = operator serves two purposes in erlang, it will assign a value to an unbound variable or it will act as a pattern matching operator if the value on the left hand side is a bound variable or number.  In this case the number 6 matches the value returned by double(3) and thus is true.
+  double() is a function that will multiply the argument by 2. It may look like we are assigning the value of double(3) to the number 6, but we are not.  Remeber that in chapter 1 we learned that the = operator serves two purposes in Erlang. 1) It will assign a value to an unbound variable. 2) It will act as a pattern matching operator if the value of the left hand term is a bound variable or number.  In this case the left hand term is the number 6 so a pattern match between it and the value returned by double(3) is performed, and the result is true.
 
 ----
 
@@ -141,10 +141,10 @@ Put the function definition below* the -export() definition.
 ----
 
 Is it true that our function name and arity would be
-	add/2.
+  add/2.
 
 True,
-  we want to take two number and add them together returning the answer to the caller.
+  we want to take two numbers and add them together returning the answer to the caller.
 
 ----
 
@@ -210,7 +210,7 @@ True,
 
 ----
 
-True or false: We can create an anonymous function that does what both the add/2 and the double/1 functions did.
+True or false: We can create a single anonymous function that does what both the add/2 and the double/1 functions did.
 
 True,
   we can create an anonymous function that does pattern matching on the arguments and determines which function it’s supposed to act as.
@@ -261,7 +261,7 @@ True or false: We can call the anonymous function with the statement
 False,
   the arity of MultiMath is /1 so passing two arguments will result in the following error.
   ** exception error: interpreted function with arity 1 called with two arguments
-	
+
 ----
 
 True or false: We can call the anonymous function with the statement

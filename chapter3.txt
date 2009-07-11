@@ -32,10 +32,28 @@ is_integer(X) is a BIF that checks if the variable X is an integer and will retu
 
 ----
 
+True or false: the guard when is_integer(X), is_integer(Y) will pass when
+  X = 1
+  Y = 2
+
+True,
+  because both X and Y are integers.
+
+----
+
+True or false: the guard when is_integer(X), is_integer(Y) will pass when
+  X = 1
+  Y = spy
+
+False,
+  a guard will not pass unless all of it's guard expressions are true, and spy is not an integer.
+
+----
+
 True or false: add/2 uses a guard sequence
 
 False,
-  a guard sequence is series of guards or guard expressions separated with semicolons. A guard sequence will succeed if at least one guard expression is true.
+  a guard sequence is series of guards or guard expressions separated with semicolons. Unlike a guard, which requires all guard expressions to be true, a guard sequence will succeed if at least one guard expression is true.
 
 ----
 
@@ -51,9 +69,8 @@ We can add guards to a function definition by using the key word "when" followed
 
 ----
 
+     add(X, Y) when is_integer(X), is_integer(Y) -> X + Y.
 
-----
-%% I still need to write these other examples. - john
 
 %% Example: function with a guard with 2 guard expressions: when both are true
 
