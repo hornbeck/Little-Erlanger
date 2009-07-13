@@ -69,21 +69,110 @@ We can add guards to a function definition by using the key word "when" followed
 
 ----
 
-     add(X, Y) when is_integer(X), is_integer(Y) -> X + Y.
+What does the following function definition do?
 
+     print_lists_and_tuples(X) when is_list(X); is_tuple(X) ->
+       io:format("Lists and tuples are awesome!~n").
 
-%% Example: function with a guard with 2 guard expressions: when both are true
+If the function receives a list or a tuple as an argument it will print 'Lists and tuples are awesome!'.
 
-%% Example: function with a guard with 2 guard expressions: when both are false
+----
 
-%% Example: function with a guard with 2 guard expressions: when one is false
+True or False: print_lists_and_tuples/1 uses a guard sequence?
 
-%% Example: function with a sequence of 2 guards: when both are true
+True,
+  it uses the guard sequence is_list(X); is_tuple(X)
+
+----
+
+What is the difference in behavior between a guard and a guard sequence?
+
+For a guard to be true, all expressions within that guard must be true, similar to the logical operator AND.  For a guard sequence to be true, at least one expression within the sequence must be true, similar to the logical operator OR.
+
+----
+
+What is the difference in syntax between a guard and a guard sequence?
+
+If a guard is composed of more than one expression, the expressions are separated by a comma.  The expression in a guard sequence are separated by semi-colons.
+
+--
+
+What is the result of print_lists_and_tuples(X) when X is
+  [foo, bar, baz]
+
+'Lists and tuples are awesome!'
+
+----
+
+Why did it evaluate in that way?
+
+Because the value of X was a list, which passed the guard sequence since it contained the guard expression is_list(X).
+
+--
+
+What is the result of print_lists_and_tuples(X) when X is
+  {foo, bar, baz}
+
+'Lists and tuples are awesome!'
+
+----
+
+Why did it evalutate that way?
+
+Because the value of X was a tuple, which passed the guard sequence since it contained the guard expression is_tuple(X).
+
+----
+
+What is the result of print_lists_and_tuples(X) when X is
+  erlang
+
+You will get an exception that looks similar to this:
+
+** exception error: no function clause matching 
+  little_erlanger:print_lists_and_tuples(erlang)
+
+----
+
+Why did we get an exception error?
+
+Because erlang is an atom, and fails to pass either of the expressions in the guard sequence.
+
+----
+
+Why didn't we specifically handle this error scenario within the function?
+
+This function only accepts lists or tuples, and it is appropriate that it should throw an exception if the wrong data type is sent to it.
+
+----
+
+Let's rewrite the function to use a guard instead of a guard sequence like this:
+
+     print_lists_and_tuples(X) when is_list(X), is_tuple(X) ->
+      io:format("Lists and tuples are awesome!~n").
+
+----
+
+What was the only change required to change from a guard sequence to a single guard with two guard expressions?
+
+We changed the semi-colon between the two guard expressions to a comma.
+
+--
+
+Now what will be the result of print_lists_and_tuples(X) when X is:
+  [foo, bar, baz]
+
+An error that looks similar to:
+
+** exception error: no function clause matching 
+  little_erlanger:print_lists_and_tuples_2([foo,bar,baz])
+
+----
+
+Why did this revision of print_lists_and_tuples() produce an error when passed a list?
+
+Because while it passed the guard expression is_list(X) it failed the second guard expression is_tuple(X).  To pass the guard it would have needed to pass both guard expressions, which is impossible as the argument cannot be both a tuple and a list.
+
 %%          sub-question: does 2nd guard in sequence even get evaluated?
-
-%% Example: function with a sequence of 2 guards: when both are false
-
-%% Example: function with a sequence of 2 guards: when first is false, 2nd true
 
 ----
 
@@ -91,6 +180,15 @@ True or false: Guards can only be used to test arguments to functions?
 
 False,
   a guard can be used anywhere that an expression is allowed. 
+
+----
+
+True or false: Any expression can be used as a guard expression?
+
+False,
+  Only a limited set of Erlang expressions are valid for use as guard expressions.  This restriction guarantees the guard expressions is side effect free.
+
+%% Might include a note on the list of these
 
 ----
 
@@ -284,8 +382,6 @@ What are the other expressions?
 zero - nine are pattern matching clauses
 
 ----
-
-%% I will address the following and add some more on exceptions to finish out the chapter. - john
 
 %% Questions I'd have:
 %%
