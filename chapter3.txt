@@ -383,6 +383,25 @@ zero - nine are pattern matching clauses
 
 ----
 
+How is Second being used at the beginning of this expression found within the case statement? 
+  Second when is_number(Second) -> First + Second
+
+Like zero-nine, this is also a patern matching clause.
+
+----
+
+When will this pattern clause match?
+
+When no other pattern (zero-nine) has matched, then this pattern will always match.
+
+----
+
+Why will this pattern always match?
+
+Because it is testing to see if the value bound to the variable Second matches itself, which it always will.
+
+--
+
 %% Questions I'd have:
 %%
 %% If and when seem very similar.  What are differences?  When should you use one over the other?
