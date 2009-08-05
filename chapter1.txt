@@ -1,5 +1,6 @@
 #title Chapter 1: atoms, tuples and lists
 
+%% [WS] Should start even more basic. Explain statements. Why is there a '.' at the end of "every line of code" here.
 
 Is it true that this is an atom?
   dog.
