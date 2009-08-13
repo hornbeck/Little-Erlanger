@@ -1,0 +1,58 @@
+#try, catch, records and list comprehensions
+
+Chapter 4
+
+# Introducing == and =:= primarily to be able to show that a record and tuple are equal.
+
+True or false: 1 == 1.0.
+
+True,
+  The value of the integer 1 and the float 1.0 are equal.
+
+----
+
+True or false: Number == 2+3 when
+  Number = 5
+
+True,
+  The variable Number is bound to the integer 5 which is equal to the sum of the integer 2 and the integer 3.
+
+----
+
+What does the == operator do?
+
+It checks for equality between the left hand and right hand terms.
+If one of the terms is a float and the other an integer Erlang will
+attempt to convert the integer into a float.
+
+----
+
+True or false: Number =:= 2+3 when
+  Number = 5
+
+True,
+  The variable Number is bound to the integer 5 which is exactly equal to the 
+  sum of the integer 2 and the integer 3.
+
+----
+
+True or false: 1 =:= 1.0.
+
+False,
+  The integer 1 is not exactly equal to the float 1.0.  They are different data types.
+
+----
+
+What does the =:= operator do?
+
+It checks for exact equality of the left and right hand terms.  No type
+conversion is performed, so the types must match.
+
+----
+
+True or false: {sandwich, rye, ham, swiss} is a tuple?
+
+True
+
+----
+
