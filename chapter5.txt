@@ -1,0 +1,110 @@
+** receive
+** bang
+** spawn
+** pid
+
+Erlang book
+
+Do you like getting mail?
+
+Yep, I sure do
+
+Do you know who else likes getting mail?
+
+You?
+
+Well yes I do, but I'm speaking of erlang processes. They like getting mail too
+
+Erlang processes like getting mail?
+
+Yes they do, every process has it's own mailbox and it loves to receive messages
+
+Let me get this straight. A process has a mailbox and likes to get mail there. Isn't that kind of silly?
+
+Nope, it's a very nice way of receiving messages from other processes
+
+So processes send mail to each other?
+
+Yes, a process can send a message to another pocesses mail box
+
+Hmm, how does it do this?
+
+With a bang
+
+A bang?
+
+Yes a bang. Really it's a ! But we call it a bang
+
+Ahh, like in unix
+
+Yes, now you've got it
+
+Ok, so processes send other processes messages by using a bang?
+
+Very good
+
+How does the receiving process know who it came from? Does it have a return address?
+
+Yes, it signs it's message
+
+Signs it?
+
+Yep, it uses the self/0 BIF
+
+And that is it's return address?
+
+Yes, just watch
+Pid ! {self(), message}
+
+So Pid receives message from self?
+
+Yes, self is the current process and it's sending a message to Pid
+
+Ok
+
+Ok?
+
+Yes, I think I have it
+
+Very good, let's move on
+
+Now when you send a letter to someone do you just sit and wait for them to write back or do you go about your business
+
+I drop it in the mail and hope that they receive it one day
+
+Hope that they receive it?
+
+Yes, I've had letters lost before.  Are you saying that won't happen here?
+
+I'm saying exactly that. If you send a message it will always get there.
+
+Ok, so back to going about my business. I don't have to wait for the other process to respond before goig on my way?
+
+Nope, send your message an keep going. It will respond when it's done
+
+Done with what?
+
+With whatever you tell it to do
+
+Ahh, so I send jobs to other processes and they do them and report back later when they are done?
+
+Yep, just like that
+
+Nice.
+
+
+How about sendig multiple messages?
+
+You mean to different processes?
+
+Yes
+
+Sure, just link them together
+
+How would I do that?
+
+Pid1!Pid2!Pid3! {self(), message}
+
+Ok, looks good
+
+
