@@ -56,3 +56,157 @@ True
 
 ----
 
+What are the 3 components of our sandwich?
+
+It is made from 1) Bread, 2) Meat, and 3) Cheese.
+
+----
+
+How could we codify this generalized recipe for making sandwiches?
+
+We could create an Erlang record.
+
+----
+
+Is the following a record definition in Erlang?
+
+-record(sandwich,
+         {bread,
+          meat,
+          cheese}).
+
+Yes,
+  That is an example of a record definition.
+
+**NOTE 
+Records can only be defined with a module.  It is not possible to define them from the REPL.
+
+----
+
+What function did we use to define a record?
+
+We used the -record() function.
+
+----
+
+What arguments does the -record() function take?
+
+The first argument is the name of the record, the second argument is a tuple of field names describing the data the record will contain.
+
+----
+
+True or false: The following creates a sandwich record and assigns it to the variable Breakfast:
+Breakfast = #sandwich{bread=bagel, meat=sausage, cheese=american}.
+
+True
+
+----
+
+True or false: You create a new record using the hash (#) symbol and the name of record definition.
+
+True
+
+----
+
+True or false: The following is a valid way to create a sandwich record:
+    Vegetarian = #sandwich{bread=rye, cheese=provolone}.
+
+True,
+    You may omit any one of the fields, in this case meat was omitted.  The record bound to the variable Vegetarian would be:
+    #sandwich{bread = rye,meat = undefined,cheese = provolone}
+
+----
+
+True or false: The following is a valid way to create a sandwich record:
+    Diet = #sandwich{}.
+
+True,
+    You may omit any, or all, of the fields.  The record bound to the variable Diet would be:
+    #sandwich{bread = undefined,meat = undefined,cheese = undefined}
+
+----
+
+True or false: The following is a valid way to create a sandwich record:
+    Lunch = #sandwich{bread=wheat, meat=turkey, cheese=munster, condiment=mustard}.
+
+False,
+    Our record definition does not define a field named condiment.  We will get the error:
+    field condiment undefined in record sandwich
+
+----
+
+True or false: The following is a valid way to create a sandwich record:
+    Cheeseburger = #sandwich{meat=burger, cheese=american, bread=bun}.
+
+True,
+    The values do not need to be assigned in the same order they were listed in the record definition.  This is because we are assigning the values by field name not order.
+
+----
+
+What is the result of:
+    Cheeseburger#sandwich.meat.
+
+burger
+
+----
+
+How do you retrieve the value of a specific field in a record that has been bound to a variable?
+
+You use the following syntax: Variable_name#record_name.field_name.
+
+----
+
+If you already bound the record to the variable, why do you have to provide the record name again?
+
+Why is bacon delicious?  It just is.
+
+----
+
+Isn't this syntax a bit redundant?
+
+Yes.
+
+Yes.
+
+----
+
+True or false: {sandwich, rye, ham, swiss} == Sandwich. when
+Sandwich = #sandwich{bread=rye, meat=ham, cheese=swiss}.
+
+True
+
+----
+
+Why is the record bound to the variable Sandwich and this tuple equal?
+
+Because both terms have equal values.
+
+----
+
+True or false: {sandwich, rye, ham, swiss} =:= Sandwich. when
+Sandwich = #sandwich{bread=rye, meat=ham, cheese=swiss}.
+
+True
+
+----
+
+Since the =:= operator requires both terms to be exactly equal (including data type), how can the record bound to the variable Sandwich be exactly equal to a tuple?
+
+Surprise!  There is no such thing as a record data type in Erlang.  The record is just a syntactic veneer over a tuple.
+
+----
+
+So the syntax to retrieve field values is a bit odd, and a record is really just a tuple in disguise... couldn't I just always use a tuple instead of a record?
+
+You could.  But records do provide some features that may be useful depending on the problem you are trying to solve.
+
+----
+
+Like what?
+
+For example, it can make the purpose of values being passed more obvious to human readers.  In our case of a sandwich it is pretty easy to determine what the values in the tuple {sandwich, rye, ham, swiss} represent.  However, imagine the tuple is {vehicle,25,75,43062}.  This is quite a bit more cryptic than the record #vehicle{mpg=25,speed=75,mileage=43062}.
+
+----
+
+
+
