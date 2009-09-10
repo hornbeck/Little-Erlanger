@@ -29,6 +29,7 @@ is_integer(X) and is_integer(Y)
 What does the guard expression is_integer(X) do?
 
 is_integer(X) is a BIF that checks if the variable X is an integer and will return true if it is and false if it is not
+%% [BW] May want to add (built in function) after BIF acronym. I believe this is the first time this term is introduced.
 
 ----
 
@@ -117,7 +118,7 @@ What is the result of print_lists_and_tuples(X) when X is
 
 ----
 
-Why did it evalutate that way?
+Why did it evaluate that way?
 
 Because the value of X was a tuple, which passed the guard sequence since it contained the guard expression is_tuple(X).
 

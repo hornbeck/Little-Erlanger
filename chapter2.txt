@@ -18,6 +18,9 @@ True,
 ----
 
 True or false: The first line of code in a module should be the module name.
+%% [BW] When I read this I saw someone just placing my_module at the top of their module
+%% instead of -module(my_module).
+%% Perhaps: The first line of code in a module should be a definition of the module's name.
 
 True,
   The first line of code in a new module is the -module(). definition. 
@@ -28,6 +31,8 @@ True or false: After the module definition you should export all public function
 
 True,
   following your module definition you should export public functions. 
+%% [BW] maybe offer a hint here:
+%% If you wish to export all functions in your module, you can do so by adding the -compile(export_all) directive.
 
 ----
 
@@ -51,6 +56,8 @@ True or false: -export() takes a list as an argument
 
 True,
   -export() takes a list containing the functions that you would like to make public.
+%% [BW] offer an example:
+%% -export([foo_function/0,bar_function/4]).
 
 ----
 
@@ -58,7 +65,8 @@ True or false:
   6 = double(3).
 
 True,
-  double() is a function that will multiply the argument by 2. It may look like we are assigning the value of double(3) to the number 6, but we are not.  Remeber that in chapter 1 we learned that the = operator serves two purposes in Erlang. 1) It will assign a value to an unbound variable. 2) It will act as a pattern matching operator if the value of the left hand term is a bound variable or number.  In this case the left hand term is the number 6 so a pattern match between it and the value returned by double(3) is performed, and the result is true.
+%% [BW] fixed typo to "Remember"
+  double() is a function that will multiply the argument by 2. It may look like we are assigning the value of double(3) to the number 6, but we are not.  Remember that in chapter 1 we learned that the = operator serves two purposes in Erlang. 1) It will assign a value to an unbound variable. 2) It will act as a pattern matching operator if the value of the left hand term is a bound variable or number.  In this case the left hand term is the number 6 so a pattern match between it and the value returned by double(3) is performed, and the result is true.
 
 ----
 
