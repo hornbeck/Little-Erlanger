@@ -17,10 +17,7 @@ True,
 
 ----
 
-True or false: The first line of code in a module should be the module name.
-%% [BW] When I read this I saw someone just placing my_module at the top of their module
-%% instead of -module(my_module).
-%% Perhaps: The first line of code in a module should be a definition of the module's name.
+True or false: The first line of code in a module should be the module definition.
 
 True,
   The first line of code in a new module is the -module(). definition. 
@@ -31,16 +28,22 @@ True or false: After the module definition you should export all public function
 
 True,
   following your module definition you should export public functions. 
-%% [BW] maybe offer a hint here:
-%% If you wish to export all functions in your module, you can do so by adding the -compile(export_all) directive.
 
 ----
 
-Will the following definition export a function?
+True or false: It's possible to export all modules in a function using -compile(export_all). 
+
+True,
+	If you would like to export all functions in your module you can use -compile(export_all). This is normally not
+	suggested to use in production but can be useful while starting to build your module.
+
+----
+
+Will the following definition export a single function?
   -export([double/1]).
 
 True,
-  the -export() function is how you will make a list of functions that are  publicly available outside of the module.
+  Using -export([double/1]) will export a single function.
 
 ----
 
@@ -56,8 +59,13 @@ True or false: -export() takes a list as an argument
 
 True,
   -export() takes a list containing the functions that you would like to make public.
-%% [BW] offer an example:
-%% -export([foo_function/0,bar_function/4]).
+
+----
+
+True or false: -export([double/1, triple/1]). will export two functions.
+
+True,
+	-export([double/1, triple/1]). contains a list of two functions; double/1 and triple/1 that will be available for use outside of the function
 
 ----
 
@@ -65,8 +73,7 @@ True or false:
   6 = double(3).
 
 True,
-%% [BW] fixed typo to "Remember"
-  double() is a function that will multiply the argument by 2. It may look like we are assigning the value of double(3) to the number 6, but we are not.  Remember that in chapter 1 we learned that the = operator serves two purposes in Erlang. 1) It will assign a value to an unbound variable. 2) It will act as a pattern matching operator if the value of the left hand term is a bound variable or number.  In this case the left hand term is the number 6 so a pattern match between it and the value returned by double(3) is performed, and the result is true.
+  double() is a function that will multiply the argument by 2. It may look like we are assigning the value of double(3) to the number 6, but we are not.  	Remember that in chapter 1 we learned that the = operator serves two purposes in Erlang. 1) It will assign a value to an unbound variable. 2) It will act as a pattern matching operator if the value of the left hand term is a bound variable or number.  In this case the left hand term is the number 6 so a pattern match between it and the value returned by double(3) is performed, and the result is true.
 
 ----
 
