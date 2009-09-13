@@ -1,3 +1,5 @@
+%% This chapter is more of a brain dump than anything right now.
+
 ** receive
 ** bang
 ** spawn
@@ -91,7 +93,6 @@ Ahh, so I send jobs to other processes and they do them and report back later wh
 Yep, just like that
 
 Nice.
-
 
 How about sending multiple messages?
 
