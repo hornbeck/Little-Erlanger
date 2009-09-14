@@ -28,8 +28,7 @@ is_integer(X) and is_integer(Y)
 
 What does the guard expression is_integer(X) do?
 
-is_integer(X) is a BIF that checks if the variable X is an integer and will return true if it is and false if it is not
-%% [BW] May want to add (built in function) after BIF acronym. I believe this is the first time this term is introduced.
+is_integer(X) is a BIF(built in function) that checks if the variable X is an integer and will return true if it is and false if it is not
 
 ----
 
@@ -188,6 +187,8 @@ True or false: Any expression can be used as a guard expression?
 
 False,
   Only a limited set of Erlang expressions are valid for use as guard expressions.  This restriction guarantees the guard expressions is side effect free.
+
+%% This is a good idea but not sure how to include it in yet. Any thoughts Justin?
 
 %% Might include a note on the list of these
 %% [BW] adding list of these per the Erlang documentation:
